@@ -13,6 +13,19 @@ config_version=4
 config/name="Gmtk 2024"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[global]
+
+editor=false
+plugin=false
+asset=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
