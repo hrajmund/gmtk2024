@@ -33,10 +33,10 @@ namespace Gmtk2024.Model
             switch (Operation)
             {
                 case Operation.Addition:
-                    readable.Append("Adds");
+                    readable.Append("Adds to");
                     break;
                 case Operation.Subtraction:
-                    readable.Append("Takes");
+                    readable.Append("Takes from");
                     break;
                 case Operation.Multiplication:
                     readable.Append("Multiplies");
@@ -46,19 +46,7 @@ namespace Gmtk2024.Model
                     break;
             }
 
-            readable.Append($" The Shape by {_value} on the ");
-
-            switch (Dimension)
-            {
-                case Dimension.X:
-                    readable.Append('X');
-                    break;
-                case Dimension.Y:
-                    readable.Append('Y');
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            readable.Append($" the Shape by {_value}x on the {_dimension.ToString()}");
 
             readable.Append(" Axis");
 
