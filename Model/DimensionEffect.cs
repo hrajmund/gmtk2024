@@ -29,7 +29,6 @@ namespace Gmtk2024.Model
 		public override string HumanReadable()
 		{
 			StringBuilder readable = new StringBuilder();
-
             switch (Operation)
             {
                 case Operation.Addition:
