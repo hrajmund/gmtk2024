@@ -1,10 +1,10 @@
-﻿namespace Gmtk2024.Model
+namespace Gmtk2024.Model
 {
-    public enum Operation
-    {
-        Addition,
-        Subtraction,
-        Multiplication,
-        Divination
-    }
+	public enum Operation
+	{
+		Addition,
+		Subtraction,
+		Multiplication,
+		Divination
+	}
 }
