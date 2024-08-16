@@ -5,5 +5,6 @@ namespace Gmtk2024.Model
     public abstract class Effect
     {
         public abstract void Apply(Coin coin);
+        public abstract string HumanReadable();
     }
 }
