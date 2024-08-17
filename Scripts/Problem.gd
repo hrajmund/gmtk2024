@@ -48,16 +48,19 @@ func generate_problem_value(operation, level: int) -> float:
 	var div_pow = operation_helper.GetPower()
 	var div_root = operation_helper.GetRoot()
 	
-	var rotation_degrees = [45.0, 90.0, -45.0, -90.0]
-	
 	match operation:
 		add_op, sub_op:
 			return round(rand_range(1, level + 2))
-		mul_op, div_op:
+		mul_op:
+			var mul_numbers = [0.0, 0.0, 0.25, 0.5, 0.75]
+			var selected = mul_numbers[randi() % mul_numbers.size()]
+			return selected + round(rand_range(0,5))
+		div_op:
 			return _round_to_one_decimal(rand_range(1, level + 1) + randf())
 		div_pow, div_root:
 			return round(rand_range(2, 3)) # TODO: maybe add funny things like 0.5
 		div_rot:
+			var rotation_degrees = [45.0, 90.0, -45.0, -90.0]
 			return rotation_degrees[randi() % rotation_degrees.size()]
 		_:
 			return 1.0
