@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class RajmundScene : Node2D
 {
 	public override void _Ready()
-	{
+	{	
 		GDScript ProblemGeneratorScript = GD.Load<GDScript>("res://Scripts/Problem.gd");
 		
 		Godot.Object ProblemGeneratorNode = (Godot.Object)ProblemGeneratorScript.New();
@@ -17,7 +17,7 @@ public class RajmundScene : Node2D
 		
 		foreach(var transformation in transformations) {
 			Operation op = (Operation)transformation;
-			float number = (float)ProblemGeneratorNode.Call("generate_problem_value", op, 1);
+			float number = (float)ProblemGeneratorNode.Call("generate_problem_value", op, 5);
 			GD.Print(op + " with: " + number);
 		}
 	}
