@@ -35,5 +35,22 @@ namespace Gmtk2024.Model
 		{
 			return Operation + " to the " + Dimension + " axis by " + _value + "x";
 		}
+
+		public override int TextureIndex()
+		{
+			switch (_operation)
+			{
+				case Operation.Addition:
+					return 0;
+				case Operation.Subtraction: 
+					return 6;
+				case Operation.Multiplication:
+					return 2;
+				case Operation.Divination:
+					return 1;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(_operation), _operation, null);
+			}
+		}
 	}
 }

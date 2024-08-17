@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://PixelArts/cards/add_card.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Card.cs" type="Script" id=2]
 [ext_resource path="res://Theme/defaultSubFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Theme/defaultFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://PixelArts/cards/power_card.png" type="Texture" id=5]
+[ext_resource path="res://PixelArts/cards/divide_card.png" type="Texture" id=6]
+[ext_resource path="res://PixelArts/cards/multiply_card.png" type="Texture" id=7]
+[ext_resource path="res://PixelArts/cards/substract_card.png" type="Texture" id=8]
+[ext_resource path="res://PixelArts/cards/rotate_card.png" type="Texture" id=9]
+[ext_resource path="res://PixelArts/cards/root_card.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 63, 150 )
@@ -64,12 +70,13 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 10.9
 scale_random = 1.0
-color = Color( 0, 0.247059, 0.909804, 1 )
+color = Color( 0.819608, 0.819608, 0.819608, 1 )
 
 [node name="Card" type="StaticBody2D"]
 z_as_relative = false
 input_pickable = true
 script = ExtResource( 2 )
+_cardTextures = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), null ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2, -7 )

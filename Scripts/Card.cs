@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Gmtk2024.Model;
 using Godot;
+using Object = Godot.Object;
 using Vector2 = Godot.Vector2;
 
 namespace Gmtk2024.Scripts;
@@ -9,6 +11,9 @@ namespace Gmtk2024.Scripts;
 public partial class Card : StaticBody2D
 {
 	private static Card _selected = null;
+
+	[Export]
+	private List<Texture> _cardTextures;
 	
 	private bool _dragging;
 	private bool _removing;
@@ -23,6 +28,7 @@ public partial class Card : StaticBody2D
 
 	private AnimationPlayer _animationPlayer;
 	private Particles2D _particles2D;
+	private Sprite _sprite;
 	
 	[Signal]
 	public delegate void DraggingStarted();
@@ -39,6 +45,7 @@ public partial class Card : StaticBody2D
 		_mainLabel = GetNode<Label>("Sprite/MainLabel");
 		_subTextLabel = GetNode<Label>("Sprite/SubTextLabel");
 		_particles2D = GetNode<Particles2D>("Particles2D");
+		_sprite = GetNode<Sprite>("Sprite");
 		AddToGroup(Reference.CardGroup);
 	}
 
@@ -48,6 +55,8 @@ public partial class Card : StaticBody2D
 		_startPos = position;
 		_rotation = rotation;
 
+		int textureUse = Effects.Count > 1 ? 7 : Effects[0].TextureIndex();
+
 		StringBuilder mainBuilder = new StringBuilder();
 		StringBuilder subBuilder = new StringBuilder();
 
@@ -56,6 +65,8 @@ public partial class Card : StaticBody2D
 			mainBuilder.Append(effect.ShortHumanReadable());
 			subBuilder.Append(effect.HumanReadable());
 		}
+
+		_sprite.Texture = _cardTextures[textureUse];
 
 		_mainLabel.Text = mainBuilder.ToString();
 		_subTextLabel.Text = subBuilder.ToString();
