@@ -46,7 +46,7 @@ namespace Gmtk2024.Model
 					return 6;
 				case Operation.Multiplication:
 					return 2;
-				case Operation.Divination:
+				case Operation.Division:
 					return 1;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(_operation), _operation, null);

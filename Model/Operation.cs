@@ -5,5 +5,5 @@ public enum Operation
 	Addition,
 	Subtraction,
 	Multiplication,
-	Divination
+	Division
 }

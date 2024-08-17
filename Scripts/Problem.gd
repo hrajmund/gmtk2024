@@ -15,7 +15,7 @@ func generate_problem(level: int) -> Array:
 		operation_helper.GetAddition(),
 		operation_helper.GetSubtraction(),
 		operation_helper.GetMultiplication(),
-		operation_helper.GetDivination(),
+		operation_helper.GetDivision(),
 	]
 	
 	if level >= fib.size() or level < 0:
@@ -39,7 +39,7 @@ func generate_problem_value(operation, level: int) -> float:
 	var add_op = operation_helper.GetAddition()
 	var sub_op = operation_helper.GetSubtraction()
 	var mul_op = operation_helper.GetMultiplication()
-	var div_op = operation_helper.GetDivination()
+	var div_op = operation_helper.GetDivision()
 	
 	match operation:
 		add_op, sub_op:
