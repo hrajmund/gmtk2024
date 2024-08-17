@@ -7,13 +7,21 @@ namespace Gmtk2024.Scripts;
 
 public partial class Card : StaticBody2D
 {
+	private static int _hoveredCount;
+
+	private static readonly object LockObj = new ();
+	
 	private bool _dragging;
 	private bool _removing;
 	private bool _hovered;
 
+	private bool _disabledHover;
+
 	private int _cardIndex;
 	private int _rotation;
 	private Vector2 _startPos;
+
+	public List<Effect> Effects;
 
 	private AnimationPlayer _animationPlayer;
 	
@@ -40,17 +48,20 @@ public partial class Card : StaticBody2D
 	{
 		EmitSignal("DraggingStopped", _cardIndex, Position.x, Position.y);
 		_dragging = false;
+		ZIndex -= 200;
 	}
 
 	private void EnableDrag()
 	{
 		_dragging = true;
-		
+		ZIndex += 200;	
 		EmitSignal("DraggingStarted");
 	}
 
 	public void TriggerRemove()
 	{
+		MouseExited();
+		ZIndex = 0;
 		_removing = true;
 		_animationPlayer.Play("CardPlayed");
 	}
@@ -75,6 +86,8 @@ public partial class Card : StaticBody2D
 
 	public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx)
 	{
+		if (!_hovered)
+			return;
 		if (@event is InputEventMouseButton mouseEvent)
 		{
 			if(mouseEvent.ButtonIndex == 1 /*Button left*/ && @event.IsPressed())
@@ -92,27 +105,48 @@ public partial class Card : StaticBody2D
 			else if(!screenTouchEvent.Pressed && screenTouchEvent.Index == 1)
 				DisableDrag();
 		}
-	}  
+	}
+
+	private void DisableHover()
+	{
+		_disabledHover = true;
+	}
+
+	private void EnableHover()
+	{
+		_disabledHover = false;
+	}
 	
 	private void MouseEntered()
 	{
-		if (_removing)
-			return;
+		lock (LockObj)
+		{
+			if (_removing || _disabledHover || _hoveredCount == 1)
+				return;
 		
-		_hovered = true;
-		RotationDegrees = 0;
-		Position += Vector2.Up * 50;
-		Scale = new Vector2(1.5f, 1.5f);
+			_hoveredCount++;
+			ZIndex = 200;
+			_hovered = true;
+			RotationDegrees = 0;
+			Position += Vector2.Up * 50;
+			Scale = new Vector2(1.5f, 1.5f);	
+		}
 	}
 	
 	private void MouseExited()
 	{
-		if (_removing)
-			return;
+		lock (LockObj)
+		{
+			if ((_removing || _disabledHover) && !_hovered && _hoveredCount == 0)
+				return;
 		
-		_hovered = false;
-		RotationDegrees = _rotation;
-		Scale = new Vector2(1, 1);
+			_hoveredCount--;
+			ZIndex = 0;
+			_hovered = false;
+			RotationDegrees = _rotation;
+			Scale = new Vector2(1, 1);	
+		}
+		
 	}	
 	
 }

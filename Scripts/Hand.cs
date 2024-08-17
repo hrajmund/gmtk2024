@@ -9,8 +9,7 @@ public class Hand : Node2D
 {
 	[Export]
 	public PackedScene CardScene;
-
-	private List<List<Effect>> _effects;
+	private List<Card> _cards = new ();
 
 	public override void _Ready()
 	{
@@ -27,24 +26,45 @@ public class Hand : Node2D
 	public void SetCards(List<List<Effect>> effects)
 	{
 		ClearCards();
-		_effects = effects;
-
-		int offset = 150;
-		float startingPos = 0 - (effects.Count / 2) * offset;
-
-		int i = 0;
-		foreach (var effect in _effects)
+		foreach (var effect in effects)
 		{
 			Card inst = CardScene.Instance() as Card;
 			AddChild(inst);
-			
-			inst.Position = Position;
-			inst.LookAt(new Vector2(GlobalPosition.x + 300, GlobalPosition.y - 200));
-			inst.Setup(i, new Vector2(startingPos, Position.y), (int)inst.RotationDegrees);
 
+			inst.Position = Position;
+			inst.Effects = effect;
+			_cards.Add(inst);
+			inst.Connect("DraggingStopped", this, "HandleCardPlay");
+		}
+		
+		RearrangeCards();
+	}
+
+	private void RearrangeCards()
+	{
+		int offset = (int)((GetViewportRect().Size.x) / 15);
+		float startingPos = Position.x - (_cards.Count / 2) * offset;
+		float startingRot = 0 - (_cards.Count / 2) * 5;
+
+		int i = 0;
+		foreach (var card in _cards)
+		{
+			card.RotationDegrees = startingRot;
+			card.Setup(i, new Vector2(startingPos, Position.y), (int)card.RotationDegrees);
 			i++;
 			startingPos += offset;
+			startingRot += 5;
 		}
+	}
+
+	private void HandleCardPlay(int index, int xOn, int yOn)
+	{
+		if (yOn > Position.y - 200)
+			return;
+		_cards[index].TriggerRemove();
+		_cards.RemoveAt(index);
+		RearrangeCards();
+		// handle application here
 	}
 
 	public void ClearCards()
