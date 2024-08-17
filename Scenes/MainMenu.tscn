@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -17,21 +17,20 @@ margin_top = -75.0
 margin_right = 69.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_top = -30.0
-margin_right = 190.0
-margin_bottom = 5.0
+margin_right = 138.0
+margin_bottom = 20.0
 text = "Start"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
-margin_top = 10.0
-margin_right = 190.0
-margin_bottom = 45.0
+margin_top = 24.0
+margin_right = 138.0
+margin_bottom = 44.0
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 50.0
-margin_right = 190.0
-margin_bottom = 85.0
+margin_top = 48.0
+margin_right = 138.0
+margin_bottom = 68.0
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
