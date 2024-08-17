@@ -5,7 +5,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Node2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 489, 125 )
+position = Vector2( 924, 486 )
 
 [node name="Button" type="Button" parent="."]
 margin_left = 126.0
