@@ -2,8 +2,8 @@ extends Node
 
 export(int) var number_of_steps = 5
 
-var operation_script = preload("res://Model/OperationHelper.cs")
-var operation_helper = operation_script.new()
+var operation_helper = preload("res://Model/OperationHelper.cs").new()
+
 
 
 func generate_problem(n: int) -> Array:
