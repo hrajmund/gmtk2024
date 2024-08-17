@@ -11,9 +11,9 @@ var score_label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	health_label = $GridContainer/HealthLabel
-	level_label = $GridContainer/LevelLabel
-	score_label = $GridContainer/ScoreLabel
+	health_label = $PanelContainer/GridContainer/HealthLabel
+	level_label = $PanelContainer/GridContainer/LevelLabel
+	score_label = $PanelContainer/GridContainer/ScoreLabel
 
 
 
