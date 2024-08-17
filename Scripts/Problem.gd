@@ -7,6 +7,8 @@ var operation_helper = preload("res://Model/OperationHelper.cs").new()
 
 
 func generate_problem(n: int) -> Array:
+	randomize()
+	
 	var problems = []
 	
 	var possibilities = [
