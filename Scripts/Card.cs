@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Text;
 using Gmtk2024.Model;
 using Godot;
-using Mutex = System.Threading.Mutex;
 using Vector2 = Godot.Vector2;
 
 namespace Gmtk2024.Scripts;
