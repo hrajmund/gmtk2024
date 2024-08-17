@@ -1,23 +1,26 @@
 extends Control
 
 export(int) var health = 3
-export(int) var score = 0
+
 export(int) var level = 1
 
 
+var max_width
+
 var health_label
 var level_label
-var score_label
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	max_width = get_parent().get_size().x
+	var panel_container = $PanelContainer
+	panel_container.size_flags_horizontal = Control.SIZE_EXPAND + Control.SIZE_SHRINK_END
+	
 	health_label = $PanelContainer/GridContainer/HealthLabel
 	level_label = $PanelContainer/GridContainer/LevelLabel
-	score_label = $PanelContainer/GridContainer/ScoreLabel
 
 
 
 func _process(delta):
 	health_label.text = "Health: " + str(health)
 	level_label.text = "Level: " + str(level)
-	score_label.text = "Score: " + str(level)
+
