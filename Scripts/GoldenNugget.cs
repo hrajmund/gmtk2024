@@ -14,13 +14,16 @@ namespace Gmtk2024.Scripts{
 		public PolygonType polygonType;
 		public List<float> trianglePointTable = new List<float>();
 		public List<float> squarePointTable = new List<float>();
-		public float[] radiuses;
+		public float[] circleData;
 
 		public override void _Ready()
 		{
 			colors = new Color[] { color };
-			radiuses = new float[2];
-			setPolygonType(PolygonType.Circle,0,144,78);
+			circleData = new float[3];
+			setPolygonType(PolygonType.Circle,2,144,121);
+
+			// 360 - playerInput
+			// playerInput 
 		}
 
 		public override void _Draw()
@@ -35,25 +38,15 @@ namespace Gmtk2024.Scripts{
 					
 					float angleTo = 360.0f;
 					float angleFrom = 0.0f;
-/*
-					for (int i = 0; i < nbPoints; ++i)
-					{
-						float anglePoint = Mathf.Deg2Rad(angleFrom + i * (angleTo - angleFrom) / nbPoints - 90);
-						float x = Mathf.Cos(anglePoint) * radiuses[0];
-						float y = Mathf.Sin(anglePoint) * radiuses[1];
-						pointsArc[i] = center + new Vector2(x, y);
-					}*/
 
-						// Convert the rotation angle to radians
-					float fasz = 90.0f;
-					float rotationAngle = 360.0f - fasz;
+					float rotationAngle = 360.0f - circleData[2];
 					float rotationRad = Mathf.Deg2Rad(rotationAngle);
 
 					for (int i = 0; i < nbPoints; ++i)
 					{
 						float anglePoint = Mathf.Deg2Rad(angleFrom + i * (angleTo - angleFrom) / nbPoints - 90);
-						float x = Mathf.Cos(anglePoint) * radiuses[0];
-						float y = Mathf.Sin(anglePoint) * radiuses[1];
+						float x = Mathf.Cos(anglePoint) * circleData[0];
+						float y = Mathf.Sin(anglePoint) * circleData[1];
 
 						// Apply rotation using the 2D rotation matrix
 						float rotatedX = x * Mathf.Cos(rotationRad) - y * Mathf.Sin(rotationRad);
@@ -90,6 +83,14 @@ namespace Gmtk2024.Scripts{
 		public override void _Process(float delta)
 		{
 			Update(); // Continuously redraw to reflect changes
+		}
+		public void updatePolygon(Operation operation, float value, Dimension dimension){
+			switch(operation){
+				case Operation.Addition: break;
+				case Operation.Divination: break;
+				case Operation.Multiplication: break;
+				case Operation.Subtraction: break;
+			}
 		}
 		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0){
 			polygonType = _polygonType;
@@ -175,8 +176,10 @@ namespace Gmtk2024.Scripts{
 					default: break;
 				}
 			}else{
-				radiuses[0] = radiusA;
-				radiuses[1] = radiusB;
+				circleData[0] = radiusA;
+				circleData[1] = radiusB;
+				circleData[2] = 45;
+//				circleData[2] = (float)rotateType;
 			}
 		}
 	} 
