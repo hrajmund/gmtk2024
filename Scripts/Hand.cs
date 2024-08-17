@@ -16,7 +16,8 @@ public class Hand : Node2D
 
 		for (int i = 0; i < 10; i++)
 		{
-			eff.Add(new List<Effect> {new DimensionEffect(Operation.Divination, Dimension.X, 10)});
+			eff.Add(new List<Effect> {new DimensionEffect(Operation.Divination, Dimension.X, 10), 
+				new DimensionEffect(Operation.Multiplication, Dimension.Y, 5)});
 		}
 
 		SetCards(eff);
