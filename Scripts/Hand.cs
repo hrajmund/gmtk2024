@@ -42,7 +42,7 @@ public class Hand : Node2D
 
 	private void RearrangeCards()
 	{
-		int offset = (int)((GetViewportRect().Size.x) / 15);
+		int offset = (int)((GetViewportRect().Size.x) / 17);
 		float startingPos = Position.x - (_cards.Count / 2) * offset;
 		float startingRot = 0 - (_cards.Count / 2) * 5;
 
@@ -50,7 +50,7 @@ public class Hand : Node2D
 		foreach (var card in _cards)
 		{
 			card.RotationDegrees = startingRot;
-			card.Setup(i, new Vector2(startingPos, Position.y), (int)card.RotationDegrees);
+			card.Setup(i, new Vector2(startingPos, Position.y + Mathf.Abs(startingRot * 2)), (int)card.RotationDegrees);
 			i++;
 			startingPos += offset;
 			startingRot += 5;

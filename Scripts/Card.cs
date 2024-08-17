@@ -2,15 +2,14 @@ using System.Collections.Generic;
 using System.Text;
 using Gmtk2024.Model;
 using Godot;
+using Mutex = System.Threading.Mutex;
 using Vector2 = Godot.Vector2;
 
 namespace Gmtk2024.Scripts;
 
 public partial class Card : StaticBody2D
 {
-	private static int _hoveredCount = 0;
-
-	private static readonly object LockObj = new ();
+	private static Card _selected = null;
 	
 	private bool _dragging;
 	private bool _removing;
@@ -69,6 +68,8 @@ public partial class Card : StaticBody2D
 
 	private void EnableDrag()
 	{
+		if (_selected != this)
+			return;
 		_dragging = true;
 		ZIndex += 200;	
 		EmitSignal("DraggingStarted");
@@ -102,8 +103,7 @@ public partial class Card : StaticBody2D
 
 	public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx)
 	{
-		if (!_hovered)
-			return;
+		GetTree().SetInputAsHandled();
 		if (@event is InputEventMouseButton mouseEvent)
 		{
 			if(mouseEvent.ButtonIndex == 1 /*Button left*/ && @event.IsPressed())
@@ -121,38 +121,36 @@ public partial class Card : StaticBody2D
 			else if(!screenTouchEvent.Pressed && screenTouchEvent.Index == 1)
 				DisableDrag();
 		}
+		else if (@event is InputEventMouseMotion mouseMotion)
+		{
+			MouseEntered();
+		}
 	}
 	
 	private void MouseEntered()
 	{
-		lock (LockObj)
-		{
-			if (_removing || _hoveredCount == 1)
-				return;
-		
-			_hoveredCount++;
-			ZIndex = 200;
-			_hovered = true;
-			RotationDegrees = 0;
-			Position += Vector2.Up * 50;
-			Scale = new Vector2(1.5f, 1.5f);	
-		}
+		if (_removing || _selected != null)
+			return;
+
+		_selected = this;
+		ZIndex = 200;
+		_hovered = true;
+		RotationDegrees = 0;
+		Position += Vector2.Up * 50;
+		Scale = new Vector2(1.5f, 1.5f);
 	}
 	
 	private void MouseExited()
 	{
-		lock (LockObj)
-		{
-			if (_removing && !_hovered && _hoveredCount == 0)
-				return;
+		if (_removing && !_hovered)
+			return;
 		
-			_hoveredCount--;
-			ZIndex = 0;
-			_hovered = false;
-			RotationDegrees = _rotation;
-			Scale = new Vector2(1, 1);	
-		}
-		
+		if(_selected == this)
+			_selected = null;
+		ZIndex = 0;
+		_hovered = false;
+		RotationDegrees = _rotation;
+		Scale = new Vector2(1, 1);
 	}	
 	
 }
