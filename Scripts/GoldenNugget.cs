@@ -3,6 +3,7 @@ using System;
 using Gmtk2024.Model;
 using System.Numerics;
 using System.Threading;
+using Vector2 = Godot.Vector2;
 
 namespace Gmtk2024.Scripts{
 	public class GoldenNugget : Node2D
@@ -56,12 +57,24 @@ namespace Gmtk2024.Scripts{
 					DrawPolygon(trianglePoints, colors);
 					break;
 				case PolygonType.Square :
+					/*
 					var squarePoints = new Godot.Vector2[4];
-					squarePoints[0] = new Godot.Vector2(0,10);
-					squarePoints[1] = new Godot.Vector2(200,10);
-					squarePoints[2] = new Godot.Vector2(0,-100);
-					squarePoints[3] = new Godot.Vector2(200,-100);
+					squarePoints[0] = new Godot.Vector2(10,0);
+					squarePoints[1] = new Godot.Vector2(-10,0);
+					squarePoints[2] = new Godot.Vector2(10,10);
+					squarePoints[3] = new Godot.Vector2(-10,10);
+
 					DrawPolygon(squarePoints, colors);
+					*/
+					Vector2[] points = new Vector2[]
+					{
+						new Vector2(100, 100), // Top-left corner
+						new Vector2(200, 100), // Top-right corner
+						new Vector2(200, 200), // Bottom-right corner
+						new Vector2(100, 200) // Bottom-left corner
+					};
+						
+					DrawPolygon(points, new Color[] { color });
 					break;
 				default: throw new NullReferenceException(); 
 			}
