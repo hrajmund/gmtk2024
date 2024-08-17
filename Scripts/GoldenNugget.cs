@@ -14,95 +14,11 @@ namespace Gmtk2024.Scripts{
 		public PolygonType polygonType;
 		public List<float> trianglePointTable = new List<float>();
 		public List<float> squarePointTable = new List<float>();
-		public void setPolygonType(PolygonType _polygonType, int rotateType = 2){
-			polygonType = _polygonType;
-			if (polygonType == PolygonType.Triangle){
-				switch(rotateType){
-					case 1:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(100); //A
-						trianglePointTable.Add(100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(0); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 2:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 3:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(0); //A
-						trianglePointTable.Add(100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 4: 
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 5:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(0); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 6:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(-100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(-100); //C
-						break;
-					}
-					case 7:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(-100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(0); //C
-						break;
-					}
-					case 8:
-					{
-						trianglePointTable.Add(-100); trianglePointTable.Add(-100); //A
-						trianglePointTable.Add(-100); trianglePointTable.Add(100); //B
-						trianglePointTable.Add(100); trianglePointTable.Add(100); //C
-						break;
-					}
-					default: break;
-				}
-			}else if(polygonType == PolygonType.Square){
-				switch(rotateType)
-				{
-					case 1:
-					{
-						squarePointTable.Add(-100); squarePointTable.Add(-100); //A
-						squarePointTable.Add(100); squarePointTable.Add(-100); //B
-						squarePointTable.Add(100); squarePointTable.Add(100); //C
-						squarePointTable.Add(-100); squarePointTable.Add(100); //D						
-						break;
-					}
-					case 2:
-					{
-						squarePointTable.Add(0); squarePointTable.Add(-100); //A
-						squarePointTable.Add(100); squarePointTable.Add(0); //B
-						squarePointTable.Add(0); squarePointTable.Add(100); //C
-						squarePointTable.Add(-100); squarePointTable.Add(0); //D
-						break;
-					}
-					default: break;
-				}
-			}
-		}
+
 		public override void _Ready()
 		{
 			colors = new Color[] { color };
-			setPolygonType(PolygonType.Square);
+			setPolygonType(PolygonType.Circle);
 		}
 
 		public override void _Draw()
@@ -151,5 +67,90 @@ namespace Gmtk2024.Scripts{
 		{
 			Update(); // Continuously redraw to reflect changes
 		}
-	}
+		public void setPolygonType(PolygonType _polygonType, int rotateType = 1){
+			polygonType = _polygonType;
+			if (polygonType == PolygonType.Triangle){
+				switch(rotateType){
+					case 1:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(100); 		//A
+						trianglePointTable.Add(100); trianglePointTable.Add(100);  		//B
+						trianglePointTable.Add(0); trianglePointTable.Add(-100);   		//C
+						break;
+					}
+					case 2:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100);		//A
+						trianglePointTable.Add(100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(-100); 		//C
+						break;
+					}
+					case 3:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(0); 		//A
+						trianglePointTable.Add(100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(-100); 		//C
+						break;
+					}
+					case 4: 
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100); 	//A
+						trianglePointTable.Add(100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(-100); 		//C
+						break;
+					}
+					case 5:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100); 	//A
+						trianglePointTable.Add(0); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(-100); 		//C
+						break;
+					}
+					case 6:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100); 	//A
+						trianglePointTable.Add(-100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(-100); 		//C
+						break;
+					}
+					case 7:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100); 	//A
+						trianglePointTable.Add(-100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(0); 		//C
+						break;
+					}
+					case 8:
+					{
+						trianglePointTable.Add(-100); trianglePointTable.Add(-100); 	//A
+						trianglePointTable.Add(-100); trianglePointTable.Add(100); 		//B
+						trianglePointTable.Add(100); trianglePointTable.Add(100); 		//C
+						break;
+					}
+					default: break;
+				}
+			}else if(polygonType == PolygonType.Square){
+				switch(rotateType)
+				{
+					case 1:
+					{
+						squarePointTable.Add(-100); squarePointTable.Add(-100); 		//A
+						squarePointTable.Add(100); squarePointTable.Add(-100); 			//B
+						squarePointTable.Add(100); squarePointTable.Add(100); 			//C
+						squarePointTable.Add(-100); squarePointTable.Add(100); 			//D						
+						break;
+					}
+					case 2:
+					{
+						squarePointTable.Add(0); squarePointTable.Add(-100); 			//A
+						squarePointTable.Add(100); squarePointTable.Add(0); 			//B
+						squarePointTable.Add(0); squarePointTable.Add(100); 			//C
+						squarePointTable.Add(-100); squarePointTable.Add(0); 			//D
+						break;
+					}
+					default: break;
+				}
+			}
+		}
+	} 
 }
