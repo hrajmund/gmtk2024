@@ -5,5 +5,8 @@ public enum Operation
 	Addition,
 	Subtraction,
 	Multiplication,
-	Division
+	Division,
+	Rotation,
+	Power,
+	Root
 }
