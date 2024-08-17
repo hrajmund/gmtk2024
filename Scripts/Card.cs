@@ -8,15 +8,13 @@ namespace Gmtk2024.Scripts;
 
 public partial class Card : StaticBody2D
 {
-	private static int _hoveredCount;
+	private static int _hoveredCount = 0;
 
 	private static readonly object LockObj = new ();
 	
 	private bool _dragging;
 	private bool _removing;
 	private bool _hovered;
-
-	private bool _disabledHover;
 
 	private int _cardIndex;
 	private int _rotation;
@@ -38,8 +36,8 @@ public partial class Card : StaticBody2D
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_mainLabel = GetNode<Label>("MainLabel");
-		_subTextLabel = GetNode<Label>("SubTextLabel");
+		_mainLabel = GetNode<Label>("Sprite/MainLabel");
+		_subTextLabel = GetNode<Label>("Sprite/SubTextLabel");
 		AddToGroup(Reference.CardGroup);
 	}
 
@@ -124,22 +122,12 @@ public partial class Card : StaticBody2D
 				DisableDrag();
 		}
 	}
-
-	private void DisableHover()
-	{
-		_disabledHover = true;
-	}
-
-	private void EnableHover()
-	{
-		_disabledHover = false;
-	}
 	
 	private void MouseEntered()
 	{
 		lock (LockObj)
 		{
-			if (_removing || _disabledHover || _hoveredCount == 1)
+			if (_removing || _hoveredCount == 1)
 				return;
 		
 			_hoveredCount++;
@@ -155,7 +143,7 @@ public partial class Card : StaticBody2D
 	{
 		lock (LockObj)
 		{
-			if ((_removing || _disabledHover) && !_hovered && _hoveredCount == 0)
+			if (_removing && !_hovered && _hoveredCount == 0)
 				return;
 		
 			_hoveredCount--;

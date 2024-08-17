@@ -1,7 +1,6 @@
-namespace Gmtk2024.Model
+namespace Gmtk2024.Model;
+public enum Dimension
 {
-	public enum Dimension
-	{
-		X, Y
-	}
+	X, 
+	Y
 }
