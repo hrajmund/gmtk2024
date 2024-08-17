@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using Gmtk2024.Model;
 using Godot;
 using Vector2 = Godot.Vector2;
@@ -31,9 +32,14 @@ public partial class Card : StaticBody2D
 	[Signal]
 	public delegate void DraggingStopped(int index, int xOn, int yOn);
 
+	private Label _mainLabel;
+	private Label _subTextLabel;
+
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_mainLabel = GetNode<Label>("MainLabel");
+		_subTextLabel = GetNode<Label>("SubTextLabel");
 		AddToGroup(Reference.CardGroup);
 	}
 
@@ -42,6 +48,18 @@ public partial class Card : StaticBody2D
 		_cardIndex = cardIndex;
 		_startPos = position;
 		_rotation = rotation;
+
+		StringBuilder mainBuilder = new StringBuilder();
+		StringBuilder subBuilder = new StringBuilder();
+
+		foreach (var effect in Effects)
+		{
+			mainBuilder.Append(effect.ShortHumanReadable());
+			subBuilder.Append(effect.HumanReadable());
+		}
+
+		_mainLabel.Text = mainBuilder.ToString();
+		_subTextLabel.Text = subBuilder.ToString();
 	}
 
 	private void DisableDrag()

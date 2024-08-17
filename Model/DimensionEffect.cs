@@ -26,6 +26,11 @@ namespace Gmtk2024.Model
 			
 		}
 
+		public override string ShortHumanReadable()
+		{
+			return _value + "x";
+		}
+
 		public override string HumanReadable()
 		{
 			StringBuilder readable = new StringBuilder();
@@ -45,7 +50,7 @@ namespace Gmtk2024.Model
 					break;
 			}
 
-			readable.Append($" the Shape by {_value}x on the {_dimension.ToString()}");
+			readable.Append($" the Shape by {_value}x on the ");
 
 			readable.Append(" Axis");
 
