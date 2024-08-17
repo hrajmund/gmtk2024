@@ -21,7 +21,7 @@ margin_right = 189.0
 margin_bottom = 21.0
 columns = 3
 
-[node name="LevelLabel" type="Label" parent="PanelContainer/GridContainer"]
+[node name="HealthLabel" type="Label" parent="PanelContainer/GridContainer"]
 margin_right = 58.0
 margin_bottom = 14.0
 text = "Health: 0"
@@ -32,7 +32,7 @@ margin_right = 120.0
 margin_bottom = 14.0
 text = "Health: 0"
 
-[node name="HealthLabel" type="Label" parent="PanelContainer/GridContainer"]
+[node name="LevelLabel" type="Label" parent="PanelContainer/GridContainer"]
 margin_left = 124.0
 margin_right = 182.0
 margin_bottom = 14.0
