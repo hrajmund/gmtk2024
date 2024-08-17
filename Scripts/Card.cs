@@ -62,9 +62,12 @@ public partial class Card : StaticBody2D
 
 		foreach (var effect in Effects)
 		{
-			mainBuilder.Append(effect.ShortHumanReadable());
-			subBuilder.Append(effect.HumanReadable());
+			mainBuilder.Append(effect.ShortHumanReadable() + ", ");
+			subBuilder.Append(effect.HumanReadable() + "\n");
 		}
+
+		mainBuilder.Remove(mainBuilder.Length - 2, 2);
+		subBuilder.Remove(subBuilder.Length - 1, 1);
 
 		_sprite.Texture = _cardTextures[textureUse];
 
