@@ -84,13 +84,227 @@ namespace Gmtk2024.Scripts{
 		{
 			Update(); // Continuously redraw to reflect changes
 		}
+		public void updateSquareAddition(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] += squarePointTable[i]*value;	
+			}
+		}
+		public void updateSquareDivison(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] /= value;	
+			}
+		}
+		public void updateSquareMultiplication(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] *= value;	
+			}
+		}
+		public void updateSquareSubstraction(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] -= squarePointTable[i]*value;	
+			}
+		}
+		public void updateSquarePower(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] = Mathf.Pow(squarePointTable[i],value);	
+			}
+		}
+		public void updateSquareRoot(float value, Dimension dimension){
+			for(int i = 0; i < squarePointTable.Count; i++){
+				squarePointTable[i] = Mathf.Pow(squarePointTable[i],1/value);	
+			}
+		}
+		public void updateSquareRotation(float value, Dimension dimension){
+			setPolygonType(PolygonType.Square,(int)value,0,0);	
+		}
+		public void updateCircleAddition(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] += circleData[0]*value;
+				circleData[1] += circleData[1]*value;
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] += circleData[0]*value;
+				}else{
+					circleData[1] += circleData[1]*value;
+				}
+			}
+		}
+		public void updateCircleDivison(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] /= value;
+				circleData[1] /= value;
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] /= value;
+				}else{
+					circleData[1] /= value;
+				}
+			}
+		}
+		public void updateCircleMultiplication(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] *= value;
+				circleData[1] *= value;
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] *= value;
+				}else{
+					circleData[1] *= value;
+				}
+			}
+		}
+		public void updateCircleSubstraction(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] -= circleData[0]*value;
+				circleData[1] -= circleData[1]*value;
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] -= circleData[0]*value;
+				}else{
+					circleData[1] -= circleData[1]*value;
+				}
+			}
+		}
+		public void updateCirclePower(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] = Mathf.Pow(circleData[0],value);
+				circleData[1] = Mathf.Pow(circleData[1],value);
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] = Mathf.Pow(circleData[0],value);
+				}else{
+					circleData[1] = Mathf.Pow(circleData[1],value);
+				}
+			}
+		}
+		public void updateCircleRoot(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				circleData[0] = Mathf.Pow(circleData[0],1/value);
+				circleData[1] = Mathf.Pow(circleData[1],1/value);
+			}else{
+				if(dimension == Dimension.X){
+					circleData[0] = Mathf.Pow(circleData[0],1/value);
+				}else{
+					circleData[1] = Mathf.Pow(circleData[1],1/value);
+				}
+			}
+		}
+		public void updateCircleRotation(float value, Dimension dimension){
+			if(circleData[0] == circleData[1]){
+				return;
+			}else{
+				setPolygonType(PolygonType.Circle,(int)value,(int)circleData[0],(int)circleData[1]);	
+			}
+		}
+		public void updateTriangleAddition(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] += trianglePointTable[i]*value;	
+			}
+		}
+		public void updateTriangleDivison(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] /= value;	
+			}
+		}
+		public void updateTriangleMultiplication(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] *= value;	
+			}
+		}
+		public void updateTriangleSubstraction(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] -= trianglePointTable[i]*value;	
+			}
+		}
+		public void updateTrianglePower(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] = Mathf.Pow(trianglePointTable[i],value);	
+			}
+		}
+		public void updateTriangleRoot(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				trianglePointTable[i] = Mathf.Pow(trianglePointTable[i],1/value);	
+			}
+		}
+		public void updateTriangleRotation(float value, Dimension dimension){
+			for(int i = 0; i < trianglePointTable.Count; i++){
+				setPolygonType(PolygonType.Triangle,(int)value,0,0);	
+			}			
+		}
 		public void updatePolygon(Operation operation, float value, Dimension dimension){
 			switch(operation){
-				case Operation.Addition: break;
-				case Operation.Divination: break;
-				case Operation.Multiplication: break;
-				case Operation.Subtraction: break;
+				case Operation.Addition: {
+					if(polygonType == PolygonType.Square){
+						updateSquareAddition(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleAddition(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleAddition(value, dimension);
+					}
+					break;
+				}
+				case Operation.Division: {
+					if(polygonType == PolygonType.Square){
+						updateSquareDivison(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleDivison(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleDivison(value, dimension);
+					}
+					break;
+				}
+				case Operation.Multiplication: {
+					if(polygonType == PolygonType.Square){
+						updateSquareMultiplication(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleMultiplication(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleMultiplication(value, dimension);
+					}					
+					break;
+				}
+				case Operation.Subtraction: {
+					if(polygonType == PolygonType.Square){
+						updateSquareSubstraction(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleSubstraction(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleSubstraction(value, dimension);
+					}		
+					break;
+				}
+				case Operation.Power: {
+					if(polygonType == PolygonType.Square){
+						updateSquarePower(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCirclePower(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTrianglePower(value, dimension);
+					}
+					break;
+				}
+				case Operation.Root: {
+					if(polygonType == PolygonType.Square){
+						updateSquareRoot(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleRoot(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleRoot(value, dimension);
+					}
+					break;
+				}
+				case Operation.Rotation:{
+					if(polygonType == PolygonType.Square){
+						updateSquareRotation(value, dimension);			
+					}else if (polygonType == PolygonType.Circle){
+						updateCircleRotation(value, dimension);
+					}else if (polygonType == PolygonType.Triangle){
+						updateTriangleRotation(value, dimension);
+					}
+					break;
+				}
 			}
+			Update();
 		}
 		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0){
 			polygonType = _polygonType;
