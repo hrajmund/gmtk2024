@@ -10,41 +10,36 @@ public partial class Card : StaticBody2D
 	private bool _dragging;
 	private bool _removing;
 	private bool _hovered;
-	
-	private List<Effect> _effects = new ();
 
 	private int _cardIndex;
-
 	private int _rotation;
 	private Vector2 _startPos;
+
+	private AnimationPlayer _animationPlayer;
 	
 	[Signal]
 	public delegate void DraggingStarted();
 
 	[Signal]
-	public delegate void DraggingStopped(List<Effect> effects, int xOn, int yOn);
+	public delegate void DraggingStopped(int index, int xOn, int yOn);
 
 	public override void _Ready()
 	{
-		Setup(new Vector2(500, 300), 30);
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		AddToGroup(Reference.CardGroup);
 	}
 
-	public void AddEffect(Effect effect)
+	public void Setup(int cardIndex, Vector2 position, int rotation)
 	{
-		_effects.Add(effect);
-	}
-
-	public void Setup(Vector2 position, int rotation)
-	{
+		_cardIndex = cardIndex;
 		_startPos = position;
 		_rotation = rotation;
 	}
 
 	private void DisableDrag()
 	{
+		EmitSignal("DraggingStopped", _cardIndex, Position.x, Position.y);
 		_dragging = false;
-		
-		EmitSignal("DraggingStopped", _effects, Position.x, Position.y, _cardIndex);
 	}
 
 	private void EnableDrag()
@@ -57,6 +52,7 @@ public partial class Card : StaticBody2D
 	public void TriggerRemove()
 	{
 		_removing = true;
+		_animationPlayer.Play("CardPlayed");
 	}
 
 	public override void _Process(float delta)
@@ -64,7 +60,7 @@ public partial class Card : StaticBody2D
 		if (_dragging)
 		{
 			Vector2 mousePos = GetViewport().GetMousePosition();
-			Position = new Vector2(mousePos);
+			GlobalPosition = new Vector2(mousePos);
 		}
 	}
 
