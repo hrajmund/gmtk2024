@@ -13,6 +13,7 @@ public partial class Card : StaticBody2D
 	private bool _dragging;
 	private bool _removing;
 	private bool _hovered;
+	public bool Playable;
 
 	private int _cardIndex;
 	private int _rotation;
@@ -21,6 +22,7 @@ public partial class Card : StaticBody2D
 	public List<Effect> Effects;
 
 	private AnimationPlayer _animationPlayer;
+	private Particles2D _particles2D;
 	
 	[Signal]
 	public delegate void DraggingStarted();
@@ -36,6 +38,7 @@ public partial class Card : StaticBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_mainLabel = GetNode<Label>("Sprite/MainLabel");
 		_subTextLabel = GetNode<Label>("Sprite/SubTextLabel");
+		_particles2D = GetNode<Particles2D>("Particles2D");
 		AddToGroup(Reference.CardGroup);
 	}
 
@@ -89,6 +92,8 @@ public partial class Card : StaticBody2D
 			Vector2 mousePos = GetViewport().GetMousePosition();
 			GlobalPosition = new Vector2(mousePos);
 		}
+
+		_particles2D.Emitting = Playable;
 	}
 
 	public override void _PhysicsProcess(float delta)

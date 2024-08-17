@@ -22,6 +22,14 @@ public class Hand : Node2D
 		SetCards(eff);
 	}
 
+	public override void _Process(float delta)
+	{
+		foreach (var card in _cards)
+		{
+			card.Playable = IsPlayableCard((int)card.Position.x, (int)card.Position.y);
+		}
+	}
+
 	public void SetCards(List<List<Effect>> effects)
 	{
 		ClearCards();
@@ -58,13 +66,22 @@ public class Hand : Node2D
 
 	private void HandleCardPlay(int index, int xOn, int yOn)
 	{
-		if (yOn > Position.y - 200)
+		if (!IsPlayableCard(xOn, yOn))
 			return;
+		List<Effect> effects = _cards[index].Effects;
 		_cards[index].TriggerRemove();
 		_cards.RemoveAt(index);
 		RearrangeCards();
 		// handle application here
+		
+		
 	}
+
+	private bool IsPlayableCard(int xOn, int yOn)
+	{
+		return yOn < Position.y - 400;
+	}
+	
 
 	public void ClearCards()
 	{
