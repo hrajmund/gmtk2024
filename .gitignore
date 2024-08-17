@@ -5,7 +5,8 @@
 .import/
 export.cfg
 export_presets.cfg
-PixelArts/Cards/*.import
+PixelArts/*.import
+*.import
 # Imported translations (automatically generated from CSV files)
 *.translation
 
