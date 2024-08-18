@@ -42,10 +42,10 @@ tracks/1/keys = {
 script = ExtResource( 5 )
 
 [node name="TargetNugget" parent="." instance=ExtResource( 2 )]
-position = Vector2( 799, 180 )
+position = Vector2( 1282, 330 )
 
 [node name="TransformNugget" parent="." instance=ExtResource( 2 )]
-position = Vector2( 375, 236 )
+position = Vector2( 625, 330 )
 
 [node name="HandManager" parent="." instance=ExtResource( 1 )]
 position = Vector2( 490, 390 )
