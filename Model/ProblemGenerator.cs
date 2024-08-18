@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Gmtk2024.Model
@@ -9,7 +8,7 @@ namespace Gmtk2024.Model
     {
         private PolygonType _polygonType;
         private int _level;
-        private Godot.Object _problemGeneratorNode;
+        private Object _problemGeneratorNode;
 
         public ProblemGenerator(PolygonType polygonType, int level)
         {
@@ -24,13 +23,12 @@ namespace Gmtk2024.Model
         {
             List<Effect> problems = new();
             var transformations = (Godot.Collections.Array)_problemGeneratorNode.Call("generate_problem", _level);
-            Random r = new Random();
             foreach (var transformation in transformations)
             {
                 
                 Operation op = (Operation)transformation;
                 float number = (float)_problemGeneratorNode.Call("generate_problem_value", op, _level);
-                problems.Add(new DimensionEffect(op, r.Next(2) == 0 ? Dimension.X : Dimension.Y, number));
+                problems.Add(new DimensionEffect(op, GD.Randi() % 2 == 0 ? Dimension.X : Dimension.Y, number));
             }
 
             return problems;

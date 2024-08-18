@@ -1,6 +1,6 @@
 using System;
-using System.Text;
 using Gmtk2024.Scripts;
+using Godot;
 
 namespace Gmtk2024.Model
 {
@@ -57,6 +57,30 @@ namespace Gmtk2024.Model
                 default:
                     throw new ArgumentOutOfRangeException(nameof(_operation), _operation, null);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns>True if randomize was successfull happened</returns>
+        public override bool Randomize(int level)
+        {
+            if (Operation == Operation.Rotation)
+                return false;
+
+            float diff = GD.Randf() * (1 - level * 0.01f) * (GD.Randi() % 2 == 0 ? -1 : 1);
+
+            int wholePart = (int)(_value + diff);
+            float fraction = Mathf.RoundToInt((_value + diff - wholePart) * 10);
+            _value = fraction / 10 + wholePart;
+
+            return true;
+        }
+
+        public override DimensionEffect Clone()
+        {
+            return new DimensionEffect(Operation, Dimension, _value);
         }
     }
 }
