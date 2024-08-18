@@ -11,6 +11,7 @@ public partial class GameController : Node
 	
 	private int _lives = 3;
 	private int _level = 1;
+	
 
 	public int Lives
 	{

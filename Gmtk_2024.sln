@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmtk 2024", "Gmtk 2024.csproj", "{877E0B4B-CE4D-40F4-B567-41F6B37E11D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmtk_2024", "Gmtk_2024.csproj", "{877E0B4B-CE4D-40F4-B567-41F6B37E11D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

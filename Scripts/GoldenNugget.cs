@@ -17,7 +17,6 @@ namespace Gmtk2024.Scripts
 		public List<float> squarePointTable = new List<float>();
 		public float[] circleData;
 		private Texture texture;
-
 		public override void _Ready()
 		{
 			colors = new Color[] { color };

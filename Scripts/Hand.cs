@@ -20,6 +20,7 @@ public class Hand : Node2D
 		foreach (var card in _cards)
 		{
 			card.Playable = IsPlayableCard((int)card.Position.x, (int)card.Position.y);
+			
 		}
 	}
 
