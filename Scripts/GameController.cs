@@ -144,7 +144,7 @@ public partial class GameController : Node
 
 	private void OnTurnFinnish()
 	{
-		var result = _transformNugget.Compare(_targetNugget);
+		var result = _transformNugget.Compare(_targetNugget, Level);
 
 		if (result)
 			Level++;
@@ -168,7 +168,7 @@ public partial class GameController : Node
 	{
 		ApplyEffectTo(_transformNugget, _handManager.CurrentPlayed);        
 		
-		GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget));
+		GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget, Level));
 	}
 }
 
