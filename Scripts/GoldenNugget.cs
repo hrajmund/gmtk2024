@@ -25,7 +25,7 @@ namespace Gmtk2024.Scripts
 			setPolygonType(PolygonType.Square, 2, 144, 121);
 
 			// Load your texture here
-			texture = (Texture)GD.Load("res://PixelArts/gold.jpg");
+			texture = (Texture)GD.Load("res://PixelArts/gold.png");
 		}
 
 		public override void _Draw()
