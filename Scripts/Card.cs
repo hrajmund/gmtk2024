@@ -96,9 +96,10 @@ public partial class Card : StaticBody2D
 		_subTextLabel.Text = subBuilder.ToString();
 	}
 
-	private void DisableDrag()
+	private void DisableDrag(bool forced)
 	{
-		EmitSignal("DraggingStopped", _cardIndex, Position.x, Position.y);
+		if(!forced)
+			EmitSignal("DraggingStopped", _cardIndex, Position.x, Position.y);
 		_dragging = false;
 		ZIndex -= 200;
 	}
@@ -148,7 +149,9 @@ public partial class Card : StaticBody2D
 			if (mouseEvent.ButtonIndex == 1 /*Button left*/ && @event.IsPressed())
 				EnableDrag();
 			else if (mouseEvent.ButtonIndex == 1 && !@event.IsPressed())
-				DisableDrag();
+				DisableDrag(false);
+			else if(mouseEvent.ButtonIndex == 2 && @event.IsPressed())
+				DisableDrag(true);
 		}
 		else if (@event is InputEventScreenTouch screenTouchEvent)
 		{
@@ -158,7 +161,7 @@ public partial class Card : StaticBody2D
 				EnableDrag();
 			}
 			else if (!screenTouchEvent.Pressed && screenTouchEvent.Index == 1)
-				DisableDrag();
+				DisableDrag(false);
 		}
 		else if (@event is InputEventMouseMotion mouseMotion)
 		{
