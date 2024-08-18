@@ -17,7 +17,7 @@ func generate_problem(level: int) -> Array:
 		operation_helper.GetSubtraction(),
 		# operation_helper.GetMultiplication(),
 		# operation_helper.GetDivision(),
-		# operation_helper.GetRotation(),
+		operation_helper.GetRotation(),
 		# operation_helper.GetPower(),
 		# operation_helper.GetRoot()
 	]
@@ -47,10 +47,16 @@ func generate_problem_value(operation, level: int) -> float:
 	var div_rot = operation_helper.GetRotation()
 	var div_pow = operation_helper.GetPower()
 	var div_root = operation_helper.GetRoot()
+
+	var max_val = level + 1
+	if max_val == 1:
+		max_val = 2
+	elif max_val > 3:
+		max_val = 3
 	
 	match operation:
 		add_op:
-			return round(rand_range(1, level + 1))
+			return round(rand_range(1, max_val))
 		sub_op:
 			return _round_to_one_decimal(rand_range(0, 1) + randf())
 		mul_op:
@@ -58,7 +64,7 @@ func generate_problem_value(operation, level: int) -> float:
 			var selected = mul_numbers[randi() % mul_numbers.size()]
 			return selected + round(rand_range(0,5))
 		div_op:
-			return _round_to_one_decimal(rand_range(1, level + 1) + randf())
+			return _round_to_one_decimal(rand_range(1, max_val) + randf())
 		div_pow, div_root:
 			var r_numbers = [1.1, 1.2, 1.3, 1.4, 1.5]
 			return r_numbers[randi() % r_numbers.size()]
