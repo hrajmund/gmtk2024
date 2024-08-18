@@ -58,6 +58,15 @@ public partial class GameController : Node
 
         var list = generator.GetProblems();
 
+        int maxGen = 10 - list.Count;
+
+        int dummyCardGenNumber = r.Next(maxGen + 1);
+
+        while (dummyCardGenNumber > 0)
+        {
+            
+        }
+
         return new();
     }
 
@@ -69,6 +78,8 @@ public partial class GameController : Node
         {
             effect.Apply(_targetNugget);
         }
+        
+        GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget));
     }
 }
 
