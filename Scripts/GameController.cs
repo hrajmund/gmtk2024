@@ -75,9 +75,11 @@ public partial class GameController : Node
 				rotateType = (GD.Randi() % 24 + 1) * 15;
 				break;
 		}
+
+		Vector2 dimensions = new Vector2(GD.Randi() % 200 + 100, GD.Randi() % 200 + 100);
 		
-		_targetNugget.setPolygonType(polygonType, (int)rotateType, (int)(GD.Randi() % 200 + 100), (int)(GD.Randi() % 200 + 100));
-		_transformNugget.setPolygonType(polygonType, (int)rotateType, (int)(GD.Randi() % 200 + 100), (int)(GD.Randi() % 200 + 100));
+		_targetNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
+		_transformNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
 		
 		var list = GenerateProblem(polygonType);
 
