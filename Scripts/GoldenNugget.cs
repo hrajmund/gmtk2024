@@ -630,7 +630,7 @@ namespace Gmtk2024.Scripts
 			{
 				switch (rotateType)
 				{
-					case 1:
+					default:
 						{
 							trianglePointTable.Add(-100); trianglePointTable.Add(100);      //A
 							trianglePointTable.Add(100); trianglePointTable.Add(100);       //B
@@ -686,22 +686,17 @@ namespace Gmtk2024.Scripts
 							trianglePointTable.Add(100); trianglePointTable.Add(100);       //C
 							break;
 						}
-					default:
-						break;
 				}
 			}
 			else if (polygonType == PolygonType.Square)
 			{
 				switch (rotateType)
 				{
-					case 1:
+					default:
 						squarePointTable.AddRange(new float[] { -100, -100, 100, -100, 100, 100, -100, 100 });  // A, B, C, D
 						break;
 					case 2:
 						squarePointTable.AddRange(new float[] { 0, -100, 100, 0, 0, 100, -100, 0 });  // A, B, C, D
-						break;
-					// Additional cases can be added as needed
-					default:
 						break;
 				}
 			}
