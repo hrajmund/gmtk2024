@@ -50,7 +50,7 @@ func generate_problem_value(operation, level: int) -> float:
 	
 	match operation:
 		add_op:
-			return round(rand_range(1, level + 2))
+			return round(rand_range(1, level + 1))
 		sub_op:
 			return _round_to_one_decimal(rand_range(0, 1) + randf())
 		mul_op:
