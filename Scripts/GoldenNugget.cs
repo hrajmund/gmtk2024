@@ -22,8 +22,8 @@ namespace Gmtk2024.Scripts
 		{
 			colors = new Color[] { color };
 			circleData = new float[3];
-			setPolygonType(PolygonType.Square, 2, 144, 121);
-
+			//setPolygonType(PolygonType.Square, 2, 144, 121);
+			GD.Print(polygonType);
 			// Load your texture here
 			texture = (Texture)GD.Load("res://PixelArts/gold.png");
 		}
@@ -626,18 +626,67 @@ namespace Gmtk2024.Scripts
 			polygonType = _polygonType;
 			trianglePointTable.Clear();
 			squarePointTable.Clear();
-
+			GD.Print(polygonType);
 			if (polygonType == PolygonType.Triangle)
 			{
 				switch (rotateType)
 				{
 					case 1:
-						trianglePointTable.AddRange(new float[] { -100, 100, 100, 100, 0, -100 });  // A, B, C
-						break;
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(100);      //A
+							trianglePointTable.Add(100); trianglePointTable.Add(100);       //B
+							trianglePointTable.Add(0); trianglePointTable.Add(-100);        //C
+							break;
+						}
 					case 2:
-						trianglePointTable.AddRange(new float[] { -100, -100, 100, 100, 100, -100 });  // A, B, C
-						break;
-					// Additional cases can be added as needed
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(100); trianglePointTable.Add(100);       //B
+							trianglePointTable.Add(100); trianglePointTable.Add(-100);      //C
+							break;
+						}
+					case 3:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(0);        //A
+							trianglePointTable.Add(100); trianglePointTable.Add(100);       //B
+							trianglePointTable.Add(100); trianglePointTable.Add(-100);      //C
+							break;
+						}
+					case 4:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(100); trianglePointTable.Add(100);       //B
+							trianglePointTable.Add(100); trianglePointTable.Add(-100);      //C
+							break;
+						}
+					case 5:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(0); trianglePointTable.Add(100);         //B
+							trianglePointTable.Add(100); trianglePointTable.Add(-100);      //C
+							break;
+						}
+					case 6:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(-100); trianglePointTable.Add(100);      //B
+							trianglePointTable.Add(100); trianglePointTable.Add(-100);      //C
+							break;
+						}
+					case 7:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(-100); trianglePointTable.Add(100);      //B
+							trianglePointTable.Add(100); trianglePointTable.Add(0);         //C
+							break;
+						}
+					case 8:
+						{
+							trianglePointTable.Add(-100); trianglePointTable.Add(-100);     //A
+							trianglePointTable.Add(-100); trianglePointTable.Add(100);      //B
+							trianglePointTable.Add(100); trianglePointTable.Add(100);       //C
+							break;
+						}
 					default:
 						break;
 				}
@@ -661,7 +710,7 @@ namespace Gmtk2024.Scripts
 			{
 				circleData[0] = radiusA;
 				circleData[1] = radiusB;
-				circleData[2] = 45;
+				circleData[2] = (float)rotateType;
 			}
 		}
 		// TODO: add treshold based on level
