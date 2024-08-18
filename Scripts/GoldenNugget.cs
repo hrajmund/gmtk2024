@@ -104,6 +104,7 @@ namespace Gmtk2024.Scripts
 		}
 		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0)
 		{
+			_Ready();
 			polygonType = _polygonType;
 			PolygonData.Clear();
 
