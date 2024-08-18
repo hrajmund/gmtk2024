@@ -21,10 +21,7 @@ var hp_textures = [
 
 
 func _ready():
-	max_width = get_parent().get_size().x
 	var panel_container = $MarginContainer
-	panel_container.size_flags_horizontal = Control.SIZE_EXPAND + Control.SIZE_SHRINK_END
-	
 
 	health_sprite = $MarginContainer/GridContainer/HealthSprite
 	level_label = $MarginContainer/GridContainer/LevelLabel

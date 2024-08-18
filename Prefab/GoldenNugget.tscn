@@ -2,9 +2,5 @@
 
 [ext_resource path="res://Scripts/GoldenNugget.cs" type="Script" id=1]
 
-[node name="Node2D" type="Node2D"]
-
-[node name="GoldenNugget" type="Node2D" parent="."]
-
-[node name="Polygon2D" type="Polygon2D" parent="GoldenNugget"]
+[node name="GoldenNugget" type="Polygon2D"]
 script = ExtResource( 1 )

@@ -103,7 +103,7 @@ public partial class Card : StaticBody2D
 	{
 		if (_dragging)
 		{
-			Vector2 mousePos = GetViewport().GetMousePosition();
+			Vector2 mousePos = GetGlobalMousePosition();
 			GlobalPosition = new Vector2(mousePos);
 		}
 
