@@ -529,16 +529,21 @@ namespace Gmtk2024.Scripts
 				
 			float diff = 0;
 			int sides = 0;
-			float max_allowed_diff = 0.5f;
+			float maxAllowedDiff = 0.5f;
 				
 			switch (this.polygonType) {
 				case PolygonType.Circle:
 					sides = circleData.Length;
-					for (int i = 0; i < circleData.Length; i++) {
-						diff += Mathf.Abs(circleData[i] - other.circleData[i]);
+					
+					float[] normalizedThisCircleData = NormalizeCircleData(this.circleData);
+					float[] normalizedOtherCircleData = NormalizeCircleData(other.circleData);
+			
+					for (int i = 0; i < sides; i++) {
+						diff += Mathf.Abs(normalizedThisCircleData[i] - normalizedOtherCircleData[i]);
 					}
-					GD.Print("TransformCircle " + String.Join(";", circleData));
-					GD.Print("TargetCircle " + String.Join(";", other.circleData));
+
+					GD.Print("NormalizedTransformCircle: " + String.Join(";", normalizedThisCircleData));
+					GD.Print("NormalizedTargetCircle: " + String.Join(";", normalizedOtherCircleData));
 					break;
 				case PolygonType.Triangle:
 					GD.Print("TransformTriangle " + String.Join(";", trianglePointTable));
@@ -550,9 +555,19 @@ namespace Gmtk2024.Scripts
 					break;
 			}
 			
-			GD.Print("Diff: " + diff + " Relative diff: " + Mathf.Sqrt(diff/sides));
-			
-			return diff / sides < max_allowed_diff;
+			float relativeDiff = Mathf.Sqrt(diff / sides);
+			GD.Print("Relative diff: " + relativeDiff);
+
+			return relativeDiff < maxAllowedDiff;
+		}
+		
+		private float[] NormalizeCircleData(float[] circleData) {
+			float[] normalizedData = new float[circleData.Length];
+			float maxRadius = Mathf.Max(circleData[0], circleData[1]);
+			for (int i = 0; i < circleData.Length; i++) {
+				normalizedData[i] = circleData[i] / maxRadius;
+			}
+			return normalizedData;
 		}
 		
 	}
