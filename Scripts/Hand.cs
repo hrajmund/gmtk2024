@@ -80,6 +80,7 @@ public class Hand : Node2D
 
 	public void ClearCards()
 	{
+		_cards.Clear();
 		GetTree().CallGroup(Reference.CardGroup, "TriggerRemove");
 	}
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.

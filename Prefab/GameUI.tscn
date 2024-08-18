@@ -1,31 +1,72 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/GameUI.gd" type="Script" id=1]
 [ext_resource path="res://PixelArts/hearts/3hearts.png" type="Texture" id=2]
 [ext_resource path="res://Theme/Default_Theme.tres" type="Theme" id=3]
+[ext_resource path="res://PixelArts/submit_button.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+health = null
+level = null
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 50.0
-margin_top = 25.0
-margin_right = 134.0
-margin_bottom = 1080.0
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 margin_right = 174.0
-margin_bottom = 1055.0
+margin_bottom = 46.0
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+margin_right = 174.0
+margin_bottom = 46.0
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/MarginContainer"]
+margin_right = 174.0
+margin_bottom = 46.0
+
+[node name="LevelLabel" type="Label" parent="AspectRatioContainer/MarginContainer/GridContainer"]
 margin_right = 174.0
 margin_bottom = 46.0
 theme = ExtResource( 3 )
 text = "Health: 0"
 
-[node name="HealthSprite" type="Sprite" parent="MarginContainer/GridContainer"]
+[node name="HealthSprite" type="Sprite" parent="AspectRatioContainer/MarginContainer/GridContainer"]
 position = Vector2( 100, 100 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer"]
+margin_left = 64.0
+margin_right = 110.0
+margin_bottom = 46.0
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 96.0
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2"]
+margin_left = 892.5
+margin_right = 1027.5
+margin_bottom = 96.0
+custom_constants/margin_top = 50
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/MarginContainer"]
+margin_top = 50.0
+margin_right = 135.0
+margin_bottom = 96.0
+
+[node name="Button" type="Button" parent="AspectRatioContainer2/MarginContainer/GridContainer"]
+margin_right = 135.0
+margin_bottom = 46.0
+theme = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "Submit"
+
+[connection signal="pressed" from="AspectRatioContainer2/MarginContainer/GridContainer/Button" to="." method="_on_Button_pressed"]

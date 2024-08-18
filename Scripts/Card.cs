@@ -115,6 +115,7 @@ public partial class Card : StaticBody2D
 
 	public void TriggerRemove()
 	{
+		RemoveFromGroup(Reference.CardGroup);
 		MouseExited();
 		ZIndex = 0;
 		_removing = true;

@@ -40,6 +40,7 @@ public partial class GameController : Node
 	private GoldenNugget _transformNugget;
 
 	private Control _uiScript;
+	private AnimationPlayer _animationPlayer;
 
 	public override void _Ready()
 	{
@@ -48,11 +49,12 @@ public partial class GameController : Node
 		_targetNugget = GetNode<GoldenNugget>("TargetNugget");
 		_transformNugget = GetNode<GoldenNugget>("TransformNugget");
 		_uiScript = GetNode<Control>("Camera2D/Control");
-
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+			
 		Level = 1;
 		Lives = 3;
 		
-		BeginLevel();
+		_animationPlayer.Play("GameBegin");
 	}
 
 	private void BeginLevel()

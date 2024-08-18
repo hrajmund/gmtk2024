@@ -1,5 +1,7 @@
 extends Control
 
+signal submit_button_pressed
+
 export(int) var health = 3
 export(int) var level = 1
 
@@ -19,12 +21,11 @@ var hp_textures = [
 ]
 
 
-
 func _ready():
-	var panel_container = $MarginContainer
+	var panel_container = $AspectRatioContainer/MarginContainer
 
-	health_sprite = $MarginContainer/GridContainer/HealthSprite
-	level_label = $MarginContainer/GridContainer/LevelLabel
+	health_sprite = $AspectRatioContainer/MarginContainer/GridContainer/HealthSprite
+	level_label = $AspectRatioContainer/MarginContainer/GridContainer/LevelLabel
 
 
 func _process(delta):
@@ -38,3 +39,7 @@ func _process(delta):
 		actual_health = health
 	
 	health_sprite.texture = hp_textures[actual_health]
+
+
+func _on_Button_pressed():
+	emit_signal("submit_button_pressed");
