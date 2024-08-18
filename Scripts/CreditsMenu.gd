@@ -1,19 +1,23 @@
 extends Control
 
+var names = [
+	"Bence Szabó - UI, Development", "László Kaiser - Development",
+	"Rajmund Hubai - Development", "Zalán Tóth - Development"
+]
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var vbox_container = $VBoxContainer
+	var title_label = $VBoxContainer/TitleLabel
+	var npc_theme = load("res://Theme/Default_Theme.tres")
 
+	names.invert()
+	for name in names:
+		var new_label = Label.new()
+		new_label.theme = npc_theme
+		new_label.text = name
+		vbox_container.add_child_below_node(title_label, new_label)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func _on_GoBackButton_pressed():
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
