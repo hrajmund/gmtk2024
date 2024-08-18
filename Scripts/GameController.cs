@@ -41,6 +41,7 @@ public partial class GameController : Node
 
 	private Control _uiScript;
 	private AnimationPlayer _animationPlayer;
+	private AnimatedSprite _wizard;
 
 	public override void _Ready()
 	{
@@ -50,7 +51,8 @@ public partial class GameController : Node
 		_transformNugget = GetNode<GoldenNugget>("TransformNugget");
 		_uiScript = GetNode<Control>("Camera2D/Control");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-			
+		_wizard = GetNode<AnimatedSprite>("Wizard");	
+		
 		Level = 1;
 		Lives = 3;
 		
@@ -168,7 +170,9 @@ public partial class GameController : Node
 
 	private void OnCardPlayed()
 	{
-		ApplyEffectTo(_transformNugget, _handManager.CurrentPlayed);        
+		ApplyEffectTo(_transformNugget, _handManager.CurrentPlayed);      
+		
+		_animationPlayer.Play("CardPlayed");
 		
 		GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget, Level));
 	}
