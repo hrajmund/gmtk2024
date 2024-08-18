@@ -27,7 +27,7 @@ public partial class Card : StaticBody2D
 	public List<Effect> Effects;
 
 	private AnimationPlayer _animationPlayer;
-	private Particles2D _particles2D;
+	private CPUParticles2D _particles2D;
 	private Sprite _sprite;
 
 	[Signal]
@@ -44,7 +44,7 @@ public partial class Card : StaticBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_mainLabel = GetNode<Label>("Sprite/MainLabel");
 		_subTextLabel = GetNode<Label>("Sprite/SubTextLabel");
-		_particles2D = GetNode<Particles2D>("Particles2D");
+		_particles2D = GetNode<CPUParticles2D>("Particles2D");
 		_sprite = GetNode<Sprite>("Sprite");
 		AddToGroup(Reference.CardGroup);
 	}
@@ -56,6 +56,27 @@ public partial class Card : StaticBody2D
 		_rotation = rotation;
 
 		int textureUse = Effects.Count > 1 ? 7 : Effects[0].TextureIndex();
+
+		switch (textureUse)
+		{
+			case 0:
+				ChangeParticleColor(237, 28, 36);
+				break;
+			case 1: ChangeParticleColor(28, 189, 71);
+                break;
+			case 2: ChangeParticleColor(77, 110, 243);
+                break;
+			case 3: ChangeParticleColor(0, 255, 174);
+                break;
+			case 4: ChangeParticleColor(156, 66, 245);
+                break;
+			case 5: ChangeParticleColor(245, 103, 37);
+                break;
+			case 6: ChangeParticleColor(255, 238, 0);
+                break;
+			case 7: ChangeParticleColor(46, 46, 46);
+				break;
+		}
 
 		StringBuilder mainBuilder = new StringBuilder();
 		StringBuilder subBuilder = new StringBuilder();
@@ -143,6 +164,11 @@ public partial class Card : StaticBody2D
 		{
 			MouseEntered();
 		}
+	}
+
+	private void ChangeParticleColor(float r, float g, float b)
+	{
+		_particles2D.Color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);
 	}
 
 	private void MouseEntered()
