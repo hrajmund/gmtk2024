@@ -8,7 +8,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "LightPulse"
-length = 7.5
+length = 10.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:energy")
@@ -17,7 +17,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.4, 2.5, 3.4, 4.4, 5.3, 6.3, 7.4 ),
+"times": PoolRealArray( 2.6, 4, 5.1, 6, 7, 7.9, 8.9, 10 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 1.0, 1.3, 1.45, 1.3, 1.35, 1.0, 0.7, 1.0 ]
