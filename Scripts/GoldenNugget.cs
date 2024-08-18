@@ -16,6 +16,104 @@ namespace Gmtk2024.Scripts
 		public List<float> trianglePointTable = new List<float>();
 		public List<float> squarePointTable = new List<float>();
 		public float[] circleData;
+		private Texture texture;
+
+		public override void _Ready()
+		{
+			colors = new Color[] { color };
+			circleData = new float[3];
+			setPolygonType(PolygonType.Square, 2, 144, 121);
+
+			// Load your texture here
+			texture = (Texture)GD.Load("res://PixelArts/gold.jpg");
+		}
+
+		public override void _Draw()
+		{
+			switch (polygonType)
+			{
+				case PolygonType.Circle:
+					// Draw Circle
+					int nbPoints = 360;
+					var pointsArc = new Vector2[nbPoints];
+					var uvsArc = new Vector2[nbPoints];
+					Vector2 center = new Vector2(0, 0);
+
+					float angleTo = 360.0f;
+					float angleFrom = 0.0f;
+
+					float rotationAngle = 360.0f - circleData[2];
+					float rotationRad = Mathf.Deg2Rad(rotationAngle);
+
+					for (int i = 0; i < nbPoints; ++i)
+					{
+						float anglePoint = Mathf.Deg2Rad(angleFrom + i * (angleTo - angleFrom) / nbPoints - 90);
+						float x = Mathf.Cos(anglePoint) * circleData[0];
+						float y = Mathf.Sin(anglePoint) * circleData[1];
+
+						// Apply rotation using the 2D rotation matrix
+						float rotatedX = x * Mathf.Cos(rotationRad) - y * Mathf.Sin(rotationRad);
+						float rotatedY = x * Mathf.Sin(rotationRad) + y * Mathf.Cos(rotationRad);
+
+						pointsArc[i] = center + new Vector2(rotatedX, rotatedY);
+
+						// Calculate UVs based on normalized positions
+						uvsArc[i] = new Vector2(0.5f + rotatedX / (2 * circleData[0]), 0.5f + rotatedY / (2 * circleData[1]));
+					}
+
+					DrawPolygon(pointsArc, null, uvsArc, texture);
+					break;
+
+				case PolygonType.Triangle:
+					// Draw Triangle
+					var trianglePoints = new Vector2[3];
+					var uvsTriangle = new Vector2[3];
+
+					trianglePoints[0] = new Vector2(trianglePointTable[0], trianglePointTable[1]);
+					trianglePoints[1] = new Vector2(trianglePointTable[2], trianglePointTable[3]);
+					trianglePoints[2] = new Vector2(trianglePointTable[4], trianglePointTable[5]);
+
+					// Calculate UVs for the triangle
+					uvsTriangle[0] = new Vector2(0.5f, 0.0f);  // Top
+					uvsTriangle[1] = new Vector2(1.0f, 1.0f);  // Bottom-right
+					uvsTriangle[2] = new Vector2(0.0f, 1.0f);  // Bottom-left
+
+					DrawPolygon(trianglePoints, null, uvsTriangle, texture);
+					break;
+
+				case PolygonType.Square:
+					// Draw Square
+					Vector2[] points = new Vector2[]
+					{
+						new Vector2(squarePointTable[0], squarePointTable[1]),  // Top-left corner
+						new Vector2(squarePointTable[2], squarePointTable[3]),  // Top-right corner
+						new Vector2(squarePointTable[4], squarePointTable[5]),  // Bottom-right corner
+						new Vector2(squarePointTable[6], squarePointTable[7])   // Bottom-left corner
+					};
+
+					// Calculate UVs for the square
+					Vector2[] uvsSquare = new Vector2[]
+					{
+						new Vector2(0.0f, 0.0f),  // Top-left
+						new Vector2(1.0f, 0.0f),  // Top-right
+						new Vector2(1.0f, 1.0f),  // Bottom-right
+						new Vector2(0.0f, 1.0f)   // Bottom-left
+					};
+
+					DrawPolygon(points, null, uvsSquare, texture);
+					break;
+
+				default:
+					throw new NullReferenceException();
+			}
+		}
+		/*
+		private Color color = new Color(255, 215, 0);
+		private Color[] colors;
+		public PolygonType polygonType;
+		public List<float> trianglePointTable = new List<float>();
+		public List<float> squarePointTable = new List<float>();
+		public float[] circleData;
 
 		public override void _Ready()
 		{
@@ -80,7 +178,7 @@ namespace Gmtk2024.Scripts
 				default: throw new NullReferenceException();
 			}
 		}
-
+*/
 		public override void _Process(float delta)
 		{
 			Update(); // Continuously redraw to reflect changes
@@ -424,6 +522,7 @@ namespace Gmtk2024.Scripts
 			}
 			Update();
 		}
+		/*
 		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0)
 		{
 			polygonType = _polygonType;
@@ -521,7 +620,50 @@ namespace Gmtk2024.Scripts
 				//				circleData[2] = (float)rotateType;
 			}
 		}
+		*/
+		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0)
+		{
+			polygonType = _polygonType;
+			trianglePointTable.Clear();
+			squarePointTable.Clear();
 
+			if (polygonType == PolygonType.Triangle)
+			{
+				switch (rotateType)
+				{
+					case 1:
+						trianglePointTable.AddRange(new float[] { -100, 100, 100, 100, 0, -100 });  // A, B, C
+						break;
+					case 2:
+						trianglePointTable.AddRange(new float[] { -100, -100, 100, 100, 100, -100 });  // A, B, C
+						break;
+					// Additional cases can be added as needed
+					default:
+						break;
+				}
+			}
+			else if (polygonType == PolygonType.Square)
+			{
+				switch (rotateType)
+				{
+					case 1:
+						squarePointTable.AddRange(new float[] { -100, -100, 100, -100, 100, 100, -100, 100 });  // A, B, C, D
+						break;
+					case 2:
+						squarePointTable.AddRange(new float[] { 0, -100, 100, 0, 0, 100, -100, 0 });  // A, B, C, D
+						break;
+					// Additional cases can be added as needed
+					default:
+						break;
+				}
+			}
+			else
+			{
+				circleData[0] = radiusA;
+				circleData[1] = radiusB;
+				circleData[2] = 45;
+			}
+		}
 		// TODO: add treshold based on level
 		public bool Compare(GoldenNugget other)
 		{
