@@ -2,7 +2,8 @@ using Godot;
 using System;
 using System.Collections;
 
-namespace Gmtk2024{
+namespace Gmtk2024
+{
     public class Test : Node2D
     {
         // Declare member variables here. Examples:
