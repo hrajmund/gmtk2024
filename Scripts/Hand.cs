@@ -10,14 +10,18 @@ public class Hand : Node2D
 	public PackedScene CardScene;
 	private List<Card> _cards = new ();
 
+	public List<Effect> CurrentPlayed { get; private set; }
+
+	[Signal]
+	public delegate void CardPlayed();
+
 	public override void _Ready()
 	{
 		List<List<Effect>> eff = new List<List<Effect>>();
 
 		for (int i = 0; i < 10; i++)
 		{
-			eff.Add(new List<Effect> {new DimensionEffect(Operation.Division, Dimension.X, 10), 
-				new DimensionEffect(Operation.Multiplication, Dimension.Y, 5)});
+			eff.Add(new List<Effect> {new DimensionEffect(Operation.Root, Dimension.X, 2)});
 		}
 
 		SetCards(eff);
@@ -74,13 +78,14 @@ public class Hand : Node2D
 		_cards.RemoveAt(index);
 		RearrangeCards();
 		// handle application here
-		
-		
+
+		CurrentPlayed = effects;
+		EmitSignal("CardPlayed");
 	}
 
 	private bool IsPlayableCard(int xOn, int yOn)
 	{
-		return yOn < Position.y - 400;
+		return yOn < Position.y - 300;
 	}
 	
 

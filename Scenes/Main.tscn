@@ -28,3 +28,5 @@ anchor_mode = 0
 current = true
 
 [node name="Control" parent="Camera2D" instance=ExtResource( 3 )]
+
+[connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]

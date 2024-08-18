@@ -23,7 +23,7 @@ namespace Gmtk2024.Model
 
 		public override void Apply(GoldenNugget nugget)
 		{
-			
+			nugget.updatePolygon(_operation, _value, _dimension);
 		}
 
 		public override string ShortHumanReadable()
@@ -48,6 +48,12 @@ namespace Gmtk2024.Model
 					return 2;
 				case Operation.Division:
 					return 1;
+				case Operation.Rotation:
+					return 5;
+				case Operation.Power:
+					return 3;
+				case Operation.Root:
+					return 4;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(_operation), _operation, null);
 			}
