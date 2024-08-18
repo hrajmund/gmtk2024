@@ -97,21 +97,6 @@ public partial class GameController : Node
 
 		var list = generator.GetProblems();
 
-		int maxGen = 10 - list.Count;
-
-		int dummyCardGenNumber = (int)(GD.Randi() % (maxGen + 1));
-
-		while (dummyCardGenNumber > 0)
-		{
-			Effect card = (Effect)list[(int)(GD.Randi() % list.Count)].Clone();
-
-			card.Randomize(_level);
-			
-			list.Add(card);
-
-			dummyCardGenNumber--;
-		}
-
 		List<List<Effect>> result = new();
 
 		foreach (var effect in list)
@@ -119,7 +104,7 @@ public partial class GameController : Node
 			result.Add(new List<Effect>() {effect});
 		}
 
-		if (_level >= LevelMergeFrom)
+		/*if (_level >= LevelMergeFrom)
 		{
 			uint mergeCards = GD.Randi() % (uint)((result.Count / 5.0f) + 0.5f);
 
@@ -148,8 +133,8 @@ public partial class GameController : Node
 		if (modBy <= 0)
 			modBy = 2;
 		uint len = (uint)(GD.Randi() % modBy);
-
-		for (int i = 0; i < len; i++)
+		*/
+		for (int i = 0; i < list.Count; i++)
 		{
 			ApplyEffectTo(_targetNugget, result[i]);
 		}
