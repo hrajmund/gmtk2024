@@ -141,7 +141,10 @@ public partial class GameController : Node
 			}
 		}
 
-		uint len = (uint)(GD.Randi() % (result.Count - 3) + 2);
+		int modBy = (result.Count - 3) + 2;
+		if (modBy <= 0)
+			modBy = 2;
+		uint len = (uint)(GD.Randi() % modBy);
 
 		for (int i = 0; i < len; i++)
 		{
