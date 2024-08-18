@@ -289,63 +289,40 @@ namespace Gmtk2024.Scripts
 			switch (operation)
 			{
 				case Operation.Addition:
-					{
-						if (polygonType == PolygonType.Circle)
-						{
-							updateCircleAddition(value, dimension);
-						}
-						else
-						{
-							updateAddition(value, dimension);
-						}
-						break;
+				{
+					if (dimension == Dimension.X)
+						this.Scale += new Vector2(value, 0);
+					else
+						this.Scale += new Vector2(0, value);
+					break;
 					}
 				case Operation.Division:
 					{
-						if (polygonType == PolygonType.Circle)
-						{
-							updateCircleDivison(value, dimension);
-						}
+						if (dimension == Dimension.X)
+							this.Scale /= new Vector2(value, 0);
 						else
-						{
-							updateDivison(value, dimension);
-						}
+							this.Scale /= new Vector2(0, value);
 						break;
 					}
 				case Operation.Multiplication:
 					{
-						if (polygonType == PolygonType.Circle)
-						{
-							updateCircleMultiplication(value, dimension);
-						}
+						if (dimension == Dimension.X)
+							this.Scale *= new Vector2(value, 0);
 						else
-						{
-							updateMultiplication(value, dimension);
-						}
+							this.Scale *= new Vector2(0, value);
 						break;
 					}
 				case Operation.Subtraction:
 					{
-						if (polygonType == PolygonType.Circle)
-						{
-							updateCircleSubstraction(value, dimension);
-						}
+						if (dimension == Dimension.X)
+							this.Scale -= new Vector2(value, 0);
 						else
-						{
-							updateSubstraction(value, dimension);
-						}
+							this.Scale -= new Vector2(0, value);
 						break;
 					}
 				case Operation.Power:
 					{
-						if (polygonType == PolygonType.Circle)
-						{
-							updateCirclePower(value, dimension);
-						}
-						else
-						{
-							updatePower(value, dimension);
-						}
+						//Placeholder
 						break;
 					}
 				case Operation.Rotation:
@@ -354,31 +331,6 @@ namespace Gmtk2024.Scripts
 			}
 			Update();
 		}
-		/*
-		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0)
-		{
-			polygonType = _polygonType;
-			PolygonData.Clear();
-			PolygonData.Clear();
-			GD.Print(polygonType);
-			if (polygonType == PolygonType.Triangle)
-			{
-				PolygonData.Add(-100); PolygonData.Add(100);      //A
-				PolygonData.Add(100); PolygonData.Add(100);       //B
-				PolygonData.Add(0); PolygonData.Add(-100);        //C
-			}
-			else if (polygonType == PolygonType.Square)
-			{
-				PolygonData.AddRange(new float[] { -100, -100, 100, -100, 100, 100, -100, 100 });  // A, B, C, D
-			}
-			else
-			{
-				PolygonData.Add(radiusA);
-				PolygonData.Add(radiusB);
-				PolygonData.Add((float)rotateType);
-			}
-		}*/
-		// TODO: add treshold based on level
 		public float Treshold(int levelNum){
 			if(levelNum == 1)
 				return 0.1f;
@@ -448,5 +400,6 @@ namespace Gmtk2024.Scripts
 
 			return relativeDiff < maxAllowedDiff;
 		}
+		
 	}
 }
