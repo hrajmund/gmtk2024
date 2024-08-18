@@ -8,9 +8,9 @@ public class ShapeNormalization : Node
 	{
 		List<float> normalizedData = new List<float>();
 		float maxRadius = Mathf.Max(circleData[0], circleData[1]);
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < circleData.Count; i++)
 		{
-			normalizedData[i] = circleData[i] / maxRadius;
+			normalizedData.Add(circleData[i] / maxRadius);
 		}
 		return normalizedData;
 	}
