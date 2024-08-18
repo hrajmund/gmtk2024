@@ -93,23 +93,29 @@ energy = 0.1
 [node name="Light2D" type="Light2D" parent="Light2D4"]
 position = Vector2( 25.1784, -29.9445 )
 rotation = 0.935246
+enabled = false
 texture = ExtResource( 8 )
 energy = 1.2
 
 [node name="Light2D2" type="Light2D" parent="Light2D4"]
 position = Vector2( -36.7603, 65.0038 )
 rotation = 4.02299
+enabled = false
 texture = ExtResource( 8 )
 energy = 1.2
 
 [node name="Light2D3" type="Light2D" parent="Light2D4"]
 position = Vector2( -42.0629, -28.7348 )
 rotation = 5.4552
+enabled = false
 texture = ExtResource( 8 )
 energy = 1.2
 
 [node name="Light2D4" type="Light2D" parent="Light2D4"]
 position = Vector2( 72.5062, 80.3918 )
 rotation = 2.25826
+enabled = false
 texture = ExtResource( 8 )
 energy = 1.2
+
+[connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
