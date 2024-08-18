@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class ShapeNormalization : Node
 {
-	public static float[] NormalizeCircleData(float[] circleData)
+	public static List<float> NormalizeCircleData(List<float> circleData)
 	{
-		float[] normalizedData = new float[circleData.Length];
+		List<float> normalizedData = new List<float>();
 		float maxRadius = Mathf.Max(circleData[0], circleData[1]);
-		for (int i = 0; i < circleData.Length; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			normalizedData[i] = circleData[i] / maxRadius;
 		}
