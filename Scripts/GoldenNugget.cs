@@ -15,7 +15,7 @@ namespace Gmtk2024.Scripts
 		public PolygonType polygonType;
 		public List<float> PolygonData = new List<float>();
 		private Texture texture;
-
+		private bool isInitialized = false;
 		public override void _Ready()
 		{
 			colors = new Color[] { color };
@@ -25,6 +25,9 @@ namespace Gmtk2024.Scripts
 
 		public override void _Draw()
 		{
+			if (!isInitialized)
+				return;
+			
 			switch (polygonType)
 			{
 				case PolygonType.Circle:
@@ -104,7 +107,7 @@ namespace Gmtk2024.Scripts
 		}
 		public void setPolygonType(PolygonType _polygonType, int rotateType = 1, int radiusA = 0, int radiusB = 0)
 		{
-			_Ready();
+			isInitialized = true;
 			polygonType = _polygonType;
 			PolygonData.Clear();
 
