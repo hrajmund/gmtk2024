@@ -15,11 +15,11 @@ func generate_problem(level: int) -> Array:
 	var possibilities = [
 		operation_helper.GetAddition(),
 		operation_helper.GetSubtraction(),
-		operation_helper.GetMultiplication(),
-		operation_helper.GetDivision(),
-		operation_helper.GetRotation(),
-		operation_helper.GetPower(),
-		operation_helper.GetRoot()
+		# operation_helper.GetMultiplication(),
+		# operation_helper.GetDivision(),
+		# operation_helper.GetRotation(),
+		# operation_helper.GetPower(),
+		# operation_helper.GetRoot()
 	]
 	
 	if level >= fib.size() or level < 0:
@@ -44,13 +44,15 @@ func generate_problem_value(operation, level: int) -> float:
 	var sub_op = operation_helper.GetSubtraction()
 	var mul_op = operation_helper.GetMultiplication()
 	var div_op = operation_helper.GetDivision()
-	var 	div_rot = operation_helper.GetRotation()
+	var div_rot = operation_helper.GetRotation()
 	var div_pow = operation_helper.GetPower()
 	var div_root = operation_helper.GetRoot()
 	
 	match operation:
-		add_op, sub_op:
+		add_op:
 			return round(rand_range(1, level + 2))
+		sub_op:
+			return _round_to_one_decimal(rand_range(0, 1) + randf())
 		mul_op:
 			var mul_numbers = [0.0, 0.0, 0.25, 0.5, 0.75]
 			var selected = mul_numbers[randi() % mul_numbers.size()]
@@ -58,7 +60,8 @@ func generate_problem_value(operation, level: int) -> float:
 		div_op:
 			return _round_to_one_decimal(rand_range(1, level + 1) + randf())
 		div_pow, div_root:
-			return round(rand_range(2, 3)) # TODO: maybe add funny things like 0.5
+			var r_numbers = [1.1, 1.2, 1.3, 1.4, 1.5]
+			return r_numbers[randi() % r_numbers.size()]
 		div_rot:
 			var rotation_degrees = [45.0, 90.0, -45.0, -90.0]
 			return rotation_degrees[randi() % rotation_degrees.size()]
