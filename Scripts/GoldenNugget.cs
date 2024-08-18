@@ -10,16 +10,12 @@ namespace Gmtk2024.Scripts
 {
 	public class GoldenNugget : Node2D
 	{
-		private Color color = new Color(1.0f, 0.843f, 0.0f); // Properly initialize color with normalized values
-		private Color[] colors;
 		public PolygonType polygonType;
 		public List<float> PolygonData = new List<float>();
 		private Texture texture;
 		private bool isInitialized = false;
 		public override void _Ready()
 		{
-			colors = new Color[] { color };
-			GD.Print(polygonType);
 			texture = (Texture)GD.Load("res://PixelArts/gold.png");
 		}
 
