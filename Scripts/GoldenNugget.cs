@@ -521,24 +521,27 @@ namespace Gmtk2024.Scripts
 				//				circleData[2] = (float)rotateType;
 			}
 		}
-		
+
 		// TODO: add treshold based on level
-		public bool Compare(GoldenNugget other) {
+		public bool Compare(GoldenNugget other)
+		{
 			if (this.polygonType != other.polygonType)
 				return false;
-				
+
 			float diff = 0;
 			int sides = 0;
 			float maxAllowedDiff = 0.5f;
-				
-			switch (this.polygonType) {
+
+			switch (this.polygonType)
+			{
 				case PolygonType.Circle:
 					sides = circleData.Length;
-					
+
 					float[] normalizedThisCircleData = NormalizeCircleData(this.circleData);
 					float[] normalizedOtherCircleData = NormalizeCircleData(other.circleData);
-			
-					for (int i = 0; i < sides; i++) {
+
+					for (int i = 0; i < sides; i++)
+					{
 						diff += Mathf.Abs(normalizedThisCircleData[i] - normalizedOtherCircleData[i]);
 					}
 
@@ -546,29 +549,96 @@ namespace Gmtk2024.Scripts
 					GD.Print("NormalizedTargetCircle: " + String.Join(";", normalizedOtherCircleData));
 					break;
 				case PolygonType.Triangle:
-					GD.Print("TransformTriangle " + String.Join(";", trianglePointTable));
-					GD.Print("TargetTriangle " + String.Join(";", other.trianglePointTable));
+					sides = 3;
+					var normalizedThisTriangle = NormalizeTriangle(this.trianglePointTable);
+					var normalizedOtherTriangle = NormalizeTriangle(other.trianglePointTable);
+					
+					for (int i = 0; i < normalizedThisTriangle.Count; i++) {
+						diff += Mathf.Abs(normalizedThisTriangle[i] - normalizedOtherTriangle[i]);
+					}
+
+					GD.Print("NormalizedTransformTriangle " + String.Join(";", normalizedThisTriangle));
+					GD.Print("NormalizedTargetTriangle " + String.Join(";", normalizedOtherTriangle));
 					break;
 				case PolygonType.Square:
-					GD.Print("TransformSquare " + String.Join(";", squarePointTable));
-					GD.Print("TargetSquare " + String.Join(";", other.squarePointTable));
+					sides = 4;
+					var normalizedThisSquare = NormalizeSquare(this.squarePointTable);
+					var normalizedOtherSquare = NormalizeSquare(other.squarePointTable);
+					
+					for (int i = 0; i < normalizedThisSquare.Count; i++) {
+						diff += Mathf.Abs(normalizedThisSquare[i] - normalizedOtherSquare[i]);
+					}
+					GD.Print("NormalizedTransformSquare " + String.Join(";", normalizedThisSquare));
+					GD.Print("NormalizedTargetSquare " + String.Join(";", normalizedOtherSquare));
 					break;
 			}
-			
+
 			float relativeDiff = Mathf.Sqrt(diff / sides);
 			GD.Print("Relative diff: " + relativeDiff);
 
 			return relativeDiff < maxAllowedDiff;
 		}
-		
-		private float[] NormalizeCircleData(float[] circleData) {
+
+		private float[] NormalizeCircleData(float[] circleData)
+		{
 			float[] normalizedData = new float[circleData.Length];
 			float maxRadius = Mathf.Max(circleData[0], circleData[1]);
-			for (int i = 0; i < circleData.Length; i++) {
+			for (int i = 0; i < circleData.Length; i++)
+			{
 				normalizedData[i] = circleData[i] / maxRadius;
 			}
 			return normalizedData;
 		}
 		
+		public static List<float> NormalizeTriangle(List<float> trianglePoints)
+		{
+			float cx = (trianglePoints[0] + trianglePoints[2] + trianglePoints[4]) / 3f;
+			float cy = (trianglePoints[1] + trianglePoints[3] + trianglePoints[5]) / 3f;
+
+
+			List<float> translatedPoints = new List<float> {
+				trianglePoints[0] - cx, trianglePoints[1] - cy,
+				trianglePoints[2] - cx, trianglePoints[3] - cy,
+				trianglePoints[4] - cx, trianglePoints[5] - cy
+			};
+
+			float maxLength = Mathf.Max(
+				Mathf.Max(
+					Mathf.Sqrt(Mathf.Pow(translatedPoints[0] - translatedPoints[2], 2) + Mathf.Pow(translatedPoints[1] - translatedPoints[3], 2)),
+					Mathf.Sqrt(Mathf.Pow(translatedPoints[2] - translatedPoints[4], 2) + Mathf.Pow(translatedPoints[3] - translatedPoints[5], 2))
+				),
+				Mathf.Sqrt(Mathf.Pow(translatedPoints[4] - translatedPoints[0], 2) + Mathf.Pow(translatedPoints[5] - translatedPoints[1], 2))
+			);
+
+			for (int i = 0; i < translatedPoints.Count; i++) {
+				translatedPoints[i] /= maxLength;
+			}
+
+			return translatedPoints;
+		}
+		
+		public static List<float> NormalizeSquare(List<float> squarePoints)
+		{
+			float cx = (squarePoints[0] + squarePoints[2] + squarePoints[4] + squarePoints[6]) / 4f;
+			float cy = (squarePoints[1] + squarePoints[3] + squarePoints[5] + squarePoints[7]) / 4f;
+
+			List<float> translatedPoints = new List<float> {
+				squarePoints[0] - cx, squarePoints[1] - cy,
+				squarePoints[2] - cx, squarePoints[3] - cy,
+				squarePoints[4] - cx, squarePoints[5] - cy,
+				squarePoints[6] - cx, squarePoints[7] - cy
+			};
+
+			float diagonalLength = Mathf.Sqrt(
+				Mathf.Pow(translatedPoints[0] - translatedPoints[4], 2) +
+				Mathf.Pow(translatedPoints[1] - translatedPoints[5], 2)
+			);
+
+			for (int i = 0; i < translatedPoints.Count; i++) {
+				translatedPoints[i] /= diagonalLength;
+			}
+
+			return translatedPoints;
+		}
 	}
 }
