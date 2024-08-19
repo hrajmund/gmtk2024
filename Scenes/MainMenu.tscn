@@ -161,8 +161,9 @@ centered = false
 position = Vector2( 962, 537 )
 scale = Vector2( 0.705333, 0.705333 )
 frames = SubResource( 3 )
-frame = 6
+frame = 3
 playing = true
+offset = Vector2( 0, -35 )
 
 [node name="Light2D" type="Light2D" parent="BackgroundSprite/TitleAnimatedSprite"]
 position = Vector2( 477.788, -523.157 )
