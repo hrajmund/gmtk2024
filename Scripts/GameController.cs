@@ -88,33 +88,33 @@ public partial class GameController : Node
 
 		uint rotateType = 0;
 
-		switch (polygonType)
-		{
-			case PolygonType.Triangle:
-				rotateType = GD.Randi() % 8 + 1;
-				break;
-			case PolygonType.Square:
-				rotateType = GD.Randi() % 2 + 1;
-				break;
-			case PolygonType.Circle:
-				rotateType = (GD.Randi() % 24 + 1) * 15;
-				break;
-		}
+		if (polygonType == PolygonType.Circle)
+			rotateType = (GD.Randi() % 24 + 1) * 15;
 
-		Vector2 dimensions = new Vector2(GD.Randi() % 200 + 100, GD.Randi() % 200 + 100);
-
+//		Vector2 dimensions = new Vector2(GD.Randi() % 200 + 100, GD.Randi() % 200 + 100);
+		Vector2 dimensions = new Vector2((GD.Randi() % 50) + 20, (GD.Randi() % 50) + 20); 
+		//Vector2 balancedDimension = new Vector2(dimensions.x > 50 ? dimensions.x/2 : dimensions.x,
+		//	dimensions.y > 50 ? dimensions.y/2: dimensions.y);
 		ClearNuggets();
 		
+//		_targetNugget.setPolygonType(polygonType, (int)rotateType, (int)balancedDimension.x, (int)balancedDimension.y);
+//		_transformNugget.setPolygonType(polygonType, (int)rotateType, (int)balancedDimension.x, (int)balancedDimension.y);
+
 		_targetNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
 		_transformNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
+
 		
 		var list = GenerateProblem(polygonType);
 
 		_handManager.SetCards(list);
-
-		foreach (var effects in list)
+		
+		if (polygonType == PolygonType.Circle)
 		{
-			ApplyEffectTo(_targetNugget, effects);
+			GD.Print("Circle data");
+			GD.Print(_transformNugget.PolygonData[0]);
+			GD.Print(_transformNugget.PolygonData[1]);
+			GD.Print(_transformNugget.PolygonData[2]);
+			
 		}
 	}
 
@@ -185,8 +185,11 @@ public partial class GameController : Node
 
 	private void ApplyEffectTo(GoldenNugget nugget, List<Effect> effects)
 	{
+		GD.Print("NEW");
 		foreach (var effect in effects)
 		{
+			GD.Print("===================================");
+			GD.Print(effect.HumanReadable());
 			effect.Apply(nugget);
 		}
 	}
