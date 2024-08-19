@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Prefab/Hand.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefab/GoldenNugget.tscn" type="PackedScene" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://PixelArts/textbubble/textbubble2.png" type="Texture" id=30]
 [ext_resource path="res://Font/Pixellari.ttf" type="DynamicFontData" id=31]
 [ext_resource path="res://Scripts/MessageBubbleLabel.cs" type="Script" id=32]
+[ext_resource path="res://PixelArts/textbubble/textbubble1.png" type="Texture" id=33]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LightPulse"
@@ -97,6 +98,10 @@ animations = [ {
 size = 66
 font_data = ExtResource( 31 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 28
+font_data = ExtResource( 31 )
+
 [sub_resource type="Animation" id=5]
 resource_name = "CardPlayed"
 length = 2.0
@@ -115,7 +120,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "GameBegin"
-length = 2.5
+length = 5.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Wizard:position")
 tracks/0/interp = 1
@@ -123,10 +128,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 3.1, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -561, 680 ), Vector2( 340, 680 ) ]
+"values": [ Vector2( -700, 680 ), Vector2( -561, 680 ), Vector2( 340, 680 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -135,7 +140,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2.5 ),
+"times": PoolRealArray( 5.6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -149,7 +154,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.5 ),
+"times": PoolRealArray( 0, 5.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -177,6 +182,42 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Goblin/TutorialInformation:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.6, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Goblin/TutorialInformation:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2.6, 3, 3.1, 5, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 35.5062, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 4.7, 4.7 ), Vector2( 4.5, 4.5 ), Vector2( 4.7, 4.7 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Goblin/TutorialInformation:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2.6, 3, 5.1 ),
+"transitions": PoolRealArray( 1, 50, 1 ),
+"update": 0,
+"values": [ Vector2( -550, -703 ), Vector2( -1216, -736 ), Vector2( -550, -410 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -303,6 +344,7 @@ light_mask = 0
 position = Vector2( 340, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
@@ -311,11 +353,10 @@ position = Vector2( 1640, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Goblin"]
-visible = false
 position = Vector2( -464, -540 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 30 )
@@ -337,6 +378,22 @@ valign = 1
 autowrap = true
 script = ExtResource( 32 )
 
+[node name="TutorialInformation" type="Sprite" parent="Goblin"]
+visible = false
+position = Vector2( -550, -410 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 33 )
+
+[node name="Label" type="Label" parent="Goblin/TutorialInformation"]
+margin_left = -269.0
+margin_top = -69.0
+margin_right = 158.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Copy me shapes on da board, an' maybe ya get to keep breathin', yes?!"
+autowrap = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/CardPlayed = SubResource( 5 )
@@ -344,7 +401,8 @@ anims/GameBegin = SubResource( 4 )
 anims/GoblinSubmitGold = SubResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 1 )
+visible = false
+modulate = Color( 0, 0, 0, 0 )
 anchor_bottom = 1.0
 margin_right = 1980.0
 margin_bottom = 2000.0
