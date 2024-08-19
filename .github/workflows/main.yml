@@ -1,0 +1,27 @@
+name: Export Web PCK
+
+on: [push, pull_request]
+
+jobs:
+  export-web-pck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Pull Docker image
+        run: docker pull robpc/godot-headless:3.5.3-html
+
+      - name: Export Web PCK
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/project \
+            robpc/godot-headless:3.5.3-html \
+            --path /project --export Web demo-web.pck
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-web.pck
+          path: demo-web.pck
