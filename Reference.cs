@@ -1,6 +1,6 @@
-﻿namespace Gmtk2024;
+namespace Gmtk2024;
 
 public sealed class Reference
 {
-    public static string CardGroup = "cards";
+	public static string CardGroup = "cards";
 }

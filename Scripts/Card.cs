@@ -63,17 +63,17 @@ public partial class Card : StaticBody2D
 				ChangeParticleColor(237, 28, 36);
 				break;
 			case 1: ChangeParticleColor(28, 189, 71);
-                break;
+				break;
 			case 2: ChangeParticleColor(77, 110, 243);
-                break;
+				break;
 			case 3: ChangeParticleColor(0, 255, 174);
-                break;
+				break;
 			case 4: ChangeParticleColor(156, 66, 245);
-                break;
+				break;
 			case 5: ChangeParticleColor(245, 103, 37);
-                break;
+				break;
 			case 6: ChangeParticleColor(255, 238, 0);
-                break;
+				break;
 			case 7: ChangeParticleColor(46, 46, 46);
 				break;
 		}
