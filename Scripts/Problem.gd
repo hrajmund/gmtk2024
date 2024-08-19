@@ -26,8 +26,13 @@ func generate_problem(level: int) -> Array:
 		level = fib.size() - 1
 	
 	var number_of_steps = fib[level]
-	for _i in range(number_of_steps):
+	var last_problem = null
+	while problems.size() < number_of_steps:
 		var choice = possibilities[randi() % possibilities.size()]
+		if last_problem == null:
+			last_problem = choice
+		elif last_problem == choice:
+			continue
 		problems.append(choice)
 	
 	return problems
