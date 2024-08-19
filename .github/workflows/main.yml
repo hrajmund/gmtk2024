@@ -21,7 +21,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/project \
             robpc/godot-headless:3.5.3-html \
-            --path /project --export HTML5 export/demo-web.pck
+            --path /project --export HTML5 export/index.pck
 
       - name: Zip Export Folder
         run: zip -r export.zip export/
