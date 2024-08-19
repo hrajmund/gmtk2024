@@ -190,56 +190,15 @@ namespace Gmtk2024.Scripts
 			if (this.polygonType != other.polygonType)
 				return false;
 
-			float diff = 0;
-			int sides = 0;
-			float maxAllowedDiff = Treshold(levelNum); 
+			float diff = Mathf.Sqrt(Mathf.Pow(this.Scale.x - other.Scale.x,2) + Mathf.Pow(this.Scale.y - other.Scale.y, 2));
+			diff += Mathf.Abs(this.RotationDegrees - other.RotationDegrees) % 180;
 
-			switch (polygonType)
-			{
-				case PolygonType.Circle:
-					sides = PolygonData.Count;
+			GD.Print("DIFF:" + diff);
 
-					List<float> normalizedThisPolygonData = ShapeNormalization.NormalizeCircleData(this.PolygonData);
-					List<float> normalizedOtherPolygonData = ShapeNormalization.NormalizeCircleData(other.PolygonData);
+			if (diff < Treshold(levelNum))
+				return true;
 
-					for (int i = 0; i < sides; i++)
-					{
-						diff += Mathf.Abs(normalizedThisPolygonData[i] - normalizedOtherPolygonData[i]);
-					}
-
-					GD.Print("NormalizedTransformCircle: " + String.Join(";", normalizedThisPolygonData));
-					GD.Print("NormalizedTargetCircle: " + String.Join(";", normalizedOtherPolygonData));
-					break;
-				case PolygonType.Triangle:
-					sides = 3;
-					var normalizedThisTriangle = ShapeNormalization.NormalizeTriangle(this.PolygonData);
-					var normalizedOtherTriangle = ShapeNormalization.NormalizeTriangle(other.PolygonData);
-					
-					for (int i = 0; i < normalizedThisTriangle.Count; i++) {
-						diff += Mathf.Abs(normalizedThisTriangle[i] - normalizedOtherTriangle[i]);
-					}
-
-					GD.Print("NormalizedTransformTriangle " + String.Join(";", normalizedThisTriangle));
-					GD.Print("NormalizedTargetTriangle " + String.Join(";", normalizedOtherTriangle));
-					break;
-				case PolygonType.Square:
-					sides = 4;
-					var normalizedThisSquare = ShapeNormalization.NormalizeSquare(this.PolygonData);
-					var normalizedOtherSquare = ShapeNormalization.NormalizeSquare(other.PolygonData);
-					
-					for (int i = 0; i < normalizedThisSquare.Count; i++) {
-						diff += Mathf.Abs(normalizedThisSquare[i] - normalizedOtherSquare[i]);
-					}
-					GD.Print("NormalizedTransformSquare " + String.Join(";", normalizedThisSquare));
-					GD.Print("NormalizedTargetSquare " + String.Join(";", normalizedOtherSquare));
-					break;
-			}
-
-			float relativeDiff = Mathf.Sqrt(diff / sides);
-			GD.Print("Relative diff: " + relativeDiff);
-
-			return relativeDiff < maxAllowedDiff;
+			return false;
 		}
-		
 	}
 }
