@@ -13,15 +13,21 @@ jobs:
       - name: Pull Docker image
         run: docker pull robpc/godot-headless:3.5.3-html
 
+      - name: Create Export Folder
+        run: mkdir -p export
+
       - name: Export Web PCK
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/project \
             robpc/godot-headless:3.5.3-html \
-            --path /project --export HTML5 demo-web.pck
+            --path /project --export HTML5 export/demo-web.pck
 
-      - name: Upload Artifact
+      - name: Zip Export Folder
+        run: zip -r export.zip export/
+
+      - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: demo-web.pck
-          path: demo-web.pck
+          name: export.zip
+          path: export.zip
