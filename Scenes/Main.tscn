@@ -159,6 +159,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
@@ -179,7 +203,6 @@ anchor_mode = 0
 current = true
 
 [node name="Control" parent="Camera2D" instance=ExtResource( 3 )]
-visible = false
 health = 3
 level = 1
 
@@ -242,23 +265,31 @@ energy = 1.2
 
 [node name="Wizard" type="AnimatedSprite" parent="."]
 light_mask = 0
-position = Vector2( -561, 680 )
+position = Vector2( 360, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
+frame = 3
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
 light_mask = 0
-position = Vector2( 2482, 680 )
+position = Vector2( 1640, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
+frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/CardPlayed = SubResource( 5 )
 anims/GameBegin = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_bottom = 1.0
+margin_right = 1980.0
+margin_bottom = 2000.0
 
 [connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
 [connection signal="submit_button_pressed" from="Camera2D/Control" to="." method="OnTurnFinnish"]

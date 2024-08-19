@@ -1,18 +1,23 @@
 extends Control
 
+var animation_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$VBoxContainer/StartButton.grab_focus()
+	animation_player = $AnimationPlayer
+	preload("res://Scenes/Main.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
+func _begin_game():
+	get_tree().change_scene("res://Scenes/Main.tscn")
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://Scenes/Main.tscn")
+	animation_player.play("FadeOutBeginGame")
 
 
 func _on_CreditsButton_pressed():
