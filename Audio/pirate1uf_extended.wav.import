@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pirate1uf_extended.wav-7a198fdafef7dd88b1692e13bb6e94e0.sample"
+
+[deps]
+
+source_file="res://Audio/pirate1uf_extended.wav"
+dest_files=[ "res://.import/pirate1uf_extended.wav-7a198fdafef7dd88b1692e13bb6e94e0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
