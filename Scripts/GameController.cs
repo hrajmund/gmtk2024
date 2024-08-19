@@ -181,6 +181,7 @@ public partial class GameController : Node
 	private void OnTurnFinnish()
 	{
 		var result = _transformNugget.Compare(_targetNugget, Level);
+		_handManager.ClearCards();
 
 		if (result) 
 		{
