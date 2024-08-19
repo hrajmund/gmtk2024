@@ -16,6 +16,9 @@ PixelArts/.DS_Store
 data_*/
 mono_crash.*.json
 
+# Build
+Build/
+
 .idea/
 
 # MacOS
