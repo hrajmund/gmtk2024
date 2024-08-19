@@ -20,7 +20,7 @@ public partial class GameController : Node
 		{
 			_lives = value;
 			_uiScript.Set("health", value);
-
+			UpdateGoblinState();
 		}
 	}
 
@@ -45,6 +45,7 @@ public partial class GameController : Node
 	private Control _uiScript;
 	private AnimationPlayer _animationPlayer;
 	private AnimatedSprite _wizard;
+	private AnimatedSprite _goblin;
 	private MessageBubbleLabel _goblinLabel;
 
 	public override void _Ready()
@@ -55,7 +56,8 @@ public partial class GameController : Node
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_wizard = GetNode<AnimatedSprite>("Wizard");
 		_goblinLabel = GetNode<MessageBubbleLabel>("Goblin/Sprite/Label");
-
+		_goblin = GetNode<AnimatedSprite>("Goblin");
+		
 		Level = _level;
 		Lives = _lives;
 		_animationPlayer.Play("GameBegin");
@@ -175,6 +177,19 @@ public partial class GameController : Node
 		}
 
 		return result;
+	}
+
+	private void UpdateGoblinState()
+	{
+		switch (_lives)
+		{
+			case 3: _goblin.Animation = "default";
+				break;
+			case 2: _goblin.Animation = "SecondPhase";
+				break;
+			case 1: _goblin.Animation = "ThirdPhase";
+				break;
+		}
 	}
 
 	private void OnTurnFinnish()
