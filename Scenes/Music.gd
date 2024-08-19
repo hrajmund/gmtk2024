@@ -1,7 +1,12 @@
 extends Node
 
+var music
+
+func _ready():
+	music = $MusicFile
+
 func playMusic():
-	$"MusicFile".play()
+	music.play()
 	
 func stopMusic():
-	$"MusicFile".stop()
+	music.stop()
