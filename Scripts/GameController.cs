@@ -9,8 +9,8 @@ public partial class GameController : Node
 {
 	[Export] private int LevelMergeFrom = 5;
 	
-	private int _lives = 3;
-	private int _level = 1;
+	[Export] private int _lives = 3;
+	[Export] private int _level = 1;
 	
 
 	public int Lives
@@ -55,10 +55,9 @@ public partial class GameController : Node
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_wizard = GetNode<AnimatedSprite>("Wizard");
 		_goblinLabel = GetNode<MessageBubbleLabel>("Goblin/Sprite/Label");
-		
-		Level = 1;
-		Lives = 3;
-		
+
+		Level = _level;
+		Lives = _lives;
 		_animationPlayer.Play("GameBegin");
 	}
 
