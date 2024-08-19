@@ -5,14 +5,17 @@ on: [push, pull_request]
 jobs:
   export-web-pck:
     runs-on: ubuntu-latest
-    container:
-      image: jonstonchan/godot:4.0.1-none
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Export Web PCK
-        run: godot --quiet --headless --export-pack Web demo-web.pck
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/project \
+            godot-headless:3.5.3-html \
+            --path /project --export Web demo-web.pck
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
