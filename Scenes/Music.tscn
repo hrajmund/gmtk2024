@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Audio/pirate1uf_extended.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Audio/pirate1uf_extended.tres" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Music.gd" type="Script" id=2]
 
 [node name="Music" type="Node"]
