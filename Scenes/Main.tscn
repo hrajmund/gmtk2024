@@ -162,12 +162,9 @@ tracks/3/keys = {
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
+_nuggetScene = ExtResource( 2 )
 
-[node name="TargetNugget" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1282, 330 )
-
-[node name="TransformNugget" parent="." instance=ExtResource( 2 )]
-position = Vector2( 625, 330 )
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="HandManager" parent="." instance=ExtResource( 1 )]
 position = Vector2( 490, 390 )
@@ -183,6 +180,8 @@ current = true
 
 [node name="Control" parent="Camera2D" instance=ExtResource( 3 )]
 visible = false
+health = 3
+level = 1
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 156, 345 )
@@ -246,7 +245,6 @@ light_mask = 0
 position = Vector2( -561, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
-frame = 4
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
@@ -255,7 +253,6 @@ position = Vector2( 2482, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
-frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
