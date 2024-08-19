@@ -15,6 +15,14 @@ run/main_scene="res://Scenes/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
+[autoload]
+
+Music="*res://Scenes/Music.tscn"
+
 [display]
 
 window/size/width=1920
