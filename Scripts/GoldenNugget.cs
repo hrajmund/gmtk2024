@@ -136,33 +136,33 @@ namespace Gmtk2024.Scripts
 				case Operation.Addition:
 				{
 					if (dimension == Dimension.X)
-						this.Scale += new Vector2(value, 0);
+						this.Scale += Scale * new Vector2(value, 0);
 					else
-						this.Scale += new Vector2(0, value);
+						this.Scale += Scale * new Vector2(0, value);
 					break;
 					}
 				case Operation.Division:
 					{
 						if (dimension == Dimension.X)
-							this.Scale /= new Vector2(value, 0);
+							this.Scale /= new Vector2(value, 1);
 						else
-							this.Scale /= new Vector2(0, value);
+							this.Scale /= new Vector2(1, value);
 						break;
 					}
 				case Operation.Multiplication:
 					{
 						if (dimension == Dimension.X)
-							this.Scale *= new Vector2(value, 0);
+							this.Scale *= new Vector2(value, 1);
 						else
-							this.Scale *= new Vector2(0, value);
+							this.Scale *= new Vector2(1, value);
 						break;
 					}
 				case Operation.Subtraction:
 					{
 						if (dimension == Dimension.X)
-							this.Scale -= new Vector2(value, 0);
+							this.Scale -= Scale * new Vector2(value, 0);
 						else
-							this.Scale -= new Vector2(0, value);
+							this.Scale -= Scale * new Vector2(0, value);
 						break;
 					}
 				case Operation.Rotation:

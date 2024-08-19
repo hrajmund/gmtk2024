@@ -318,7 +318,7 @@ light_mask = 0
 position = Vector2( -561, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
@@ -327,7 +327,7 @@ position = Vector2( 2482, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Goblin"]

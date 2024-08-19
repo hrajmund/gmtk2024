@@ -45,6 +45,7 @@ public partial class GameController : Node
 	private Control _uiScript;
 	private AnimationPlayer _animationPlayer;
 	private AnimatedSprite _wizard;
+	private MessageBubbleLabel _goblinLabel;
 
 	public override void _Ready()
 	{
@@ -53,6 +54,7 @@ public partial class GameController : Node
 		_uiScript = GetNode<Control>("Camera2D/Control");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_wizard = GetNode<AnimatedSprite>("Wizard");
+		_goblinLabel = GetNode<MessageBubbleLabel>("Goblin/Sprite/Label");
 		
 		Level = 1;
 		Lives = 3;
@@ -131,12 +133,17 @@ public partial class GameController : Node
 			result.Add(new List<Effect>() {effect});
 		}
 
-		/*if (_level >= LevelMergeFrom)
+		if (_level >= LevelMergeFrom)
 		{
-			uint mergeCards = GD.Randi() % (uint)((result.Count / 5.0f) + 0.5f);
-
+			uint mergeCards = (uint)(GD.Randi() % result.Count);
+			GD.Print(mergeCards + " Cards can be merged");
 			while (mergeCards > 0)
 			{
+				if (GD.Randf() >= .4f)
+				{
+					mergeCards--;
+					continue;
+				}
 				int oneCard = (int)(GD.Randi() % result.Count);
 
 				int secondCard = (int)(GD.Randi() % result.Count);
@@ -155,15 +162,17 @@ public partial class GameController : Node
 				mergeCards--;
 			}
 		}
+		
+		bool[] flags = new bool[result.Count];
 
-		int modBy = (result.Count - 3) + 2;
-		if (modBy <= 0)
-			modBy = 2;
-		uint len = (uint)(GD.Randi() % modBy);
-		*/
-		for (int i = 0; i < list.Count; i++)
+		int iter = Mathf.RoundToInt((float)result.Count / 2 + .5f);
+		for (int i = 0; i < iter; i++)
 		{
-			ApplyEffectTo(_targetNugget, result[i]);
+			int rand = (int)(GD.Randi() % result.Count);
+			while(flags[rand])
+				rand = (int)(GD.Randi() % result.Count);
+			ApplyEffectTo(_targetNugget, result[rand]);
+			flags[rand] = true;
 		}
 
 		return result;
@@ -173,12 +182,19 @@ public partial class GameController : Node
 	{
 		var result = _transformNugget.Compare(_targetNugget, Level);
 
-		if (result)
+		if (result) 
+		{
+			_goblinLabel.SetRandomPositive();
 			Level++;
-		else Lives--;
+		}
+		else
+		{
+			_goblinLabel.SetRandomNegative();
+			Lives--;
+		}
 
 		if (Lives > 0)
-			BeginLevel();
+			_animationPlayer.Play("GoblinSubmitGold");
 		else // game over
 			return;
 	}
@@ -198,9 +214,15 @@ public partial class GameController : Node
 	{
 		ApplyEffectTo(_transformNugget, _handManager.CurrentPlayed);      
 		
-		_animationPlayer.Play("CardPlayed");
-		
 		GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget, Level));
+		
+		
+		if (!_handManager.HasMoreCards())
+		{
+			OnTurnFinnish();
+		}
+		else _animationPlayer.Play("CardPlayed");
+
 	}
 }
 
