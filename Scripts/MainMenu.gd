@@ -6,6 +6,7 @@ var animation_player
 func _ready():
 	$VBoxContainer/StartButton.grab_focus()
 	animation_player = $AnimationPlayer
+	Music.playMusic()
 	preload("res://Scenes/Main.tscn")
 
 
