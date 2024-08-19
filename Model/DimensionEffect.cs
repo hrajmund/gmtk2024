@@ -10,7 +10,7 @@ namespace Gmtk2024.Model
         private Dimension _dimension;
         private float _value;
 
-        public Operation Operation => _operation;
+        public Operation Op => _operation;
         public float Value => _value;
         public Dimension Dimension => _dimension;
 
@@ -28,12 +28,14 @@ namespace Gmtk2024.Model
 
         public override string ShortHumanReadable()
         {
-            return _value + "x";
+            string suffix = Op == Operation.Rotation ? "°" : "x";
+            return _value.ToString() + suffix;
         }
 
         public override string HumanReadable()
         {
-            return Operation + " to the " + Dimension + " axis by " + _value + "x";
+            string suffix = Op == Operation.Rotation ? "°" : "x";
+            return Op.ToString() + " to the " + Dimension.ToString() + " axis by " + _value.ToString() + suffix;
         }
 
         public override int TextureIndex()
@@ -66,7 +68,7 @@ namespace Gmtk2024.Model
         /// <returns>True if randomize was successfull happened</returns>
         public override bool Randomize(int level)
         {
-            if (Operation == Operation.Rotation)
+            if (Op == Operation.Rotation)
                 return false;
 
             float diff = GD.Randf() * (1 - level * 0.01f) * (GD.Randi() % 2 == 0 ? -1 : 1);
@@ -80,7 +82,7 @@ namespace Gmtk2024.Model
 
         public override DimensionEffect Clone()
         {
-            return new DimensionEffect(Operation, Dimension, _value);
+            return new DimensionEffect(Op, Dimension, _value);
         }
     }
 }
