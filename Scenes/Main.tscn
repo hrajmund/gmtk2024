@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Prefab/Hand.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefab/GoldenNugget.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://Font/Pixellari.ttf" type="DynamicFontData" id=31]
 [ext_resource path="res://Scripts/MessageBubbleLabel.cs" type="Script" id=32]
 [ext_resource path="res://PixelArts/textbubble/textbubble1.png" type="Texture" id=33]
+[ext_resource path="res://PixelArts/characters/goblin_head.png" type="Texture" id=34]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LightPulse"
@@ -220,6 +221,58 @@ tracks/7/keys = {
 "values": [ Vector2( -550, -300 ), Vector2( -1216, -736 ), Vector2( -550, -300 ) ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "GameEnd"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.4, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=7]
 resource_name = "GoblinSubmitGold"
 length = 1.5
@@ -262,6 +315,31 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="DynamicFont" id=10]
+size = 73
+font_data = ExtResource( 31 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "HeadMovement"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -3, -3, -3 ),
+"update": 0,
+"values": [ Vector2( 1024, -116 ), Vector2( 1024, -230 ), Vector2( 1024, -116 ) ]
+}
+
+[sub_resource type="DynamicFont" id=12]
+size = 50
+font_data = ExtResource( 31 )
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
 _nuggetScene = ExtResource( 2 )
@@ -281,6 +359,7 @@ anchor_mode = 0
 current = true
 
 [node name="Control" parent="Camera2D" instance=ExtResource( 3 )]
+visible = false
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 156, 345 )
@@ -341,10 +420,10 @@ energy = 1.2
 
 [node name="Wizard" type="AnimatedSprite" parent="."]
 light_mask = 0
-position = Vector2( 340, 680 )
+position = Vector2( -682.065, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
@@ -398,15 +477,49 @@ autowrap = true
 reset_on_save = false
 anims/CardPlayed = SubResource( 5 )
 anims/GameBegin = SubResource( 4 )
+anims/GameEnd = SubResource( 9 )
 anims/GoblinSubmitGold = SubResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 0.285714 )
 anchor_bottom = 1.0
 margin_right = 1980.0
 margin_bottom = 2000.0
 
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -3.0
+margin_top = 712.0
+margin_right = 1921.0
+margin_bottom = 786.0
+custom_fonts/font = SubResource( 10 )
+text = "Oi! Ya messed up! No shapes, no breathin'!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+root_node = NodePath("../GameOverHead")
+autoplay = "HeadMovement"
+anims/HeadMovement = SubResource( 11 )
+
+[node name="Button" type="Button" parent="Label"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -157.0
+margin_top = 51.0
+margin_right = 162.0
+margin_bottom = 108.0
+custom_fonts/font = SubResource( 12 )
+text = "Back To Menu"
+
+[node name="GameOverHead" type="Sprite" parent="Label"]
+position = Vector2( 1024, -139.67 )
+texture = ExtResource( 34 )
+
 [connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
 [connection signal="CardPlayed" from="HandManager" to="Camera2D/Control" method="_on_HandManager_CardPlayed"]
 [connection signal="submit_button_pressed" from="Camera2D/Control" to="." method="OnTurnFinnish"]
+[connection signal="pressed" from="Label/Button" to="." method="LoadMainScene"]

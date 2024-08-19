@@ -210,8 +210,18 @@ public partial class GameController : Node
 
 		if (Lives > 0)
 			_animationPlayer.Play("GoblinSubmitGold");
-		else // game over
+		else GameOver();
 			return;
+	}
+
+	private void GameOver()
+	{
+		_animationPlayer.Play("GameEnd");
+	}
+
+	private void LoadMainScene()
+	{
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
 
 	private void ApplyEffectTo(GoldenNugget nugget, List<Effect> effects)

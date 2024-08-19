@@ -3,7 +3,7 @@ using System;
 
 public class MessageBubbleLabel : Label
 {
-    private string[] _positiveMessages = { "Shiny", "Treasure", "Beauty", "Me like", "Mine" };
+    private string[] _positiveMessages = { "Shiny", "Treasure", "Beauty", "Me like", "Mine", "Ye did it, savvy" };
     private string[] _negativeMessages = { "Tarnished tin", "Looks like an old boot", 
         "I'd rather see me own reflection", "This gold could scare a troll", 
         "I’d trade it for moldy bread", };
