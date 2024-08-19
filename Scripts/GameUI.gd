@@ -26,13 +26,13 @@ func _ready():
 	var panel_container = $AspectRatioContainer/MarginContainer
 
 	health_sprite = $AspectRatioContainer/MarginContainer/GridContainer/HealthSprite
-	level_label = $AspectRatioContainer/MarginContainer/GridContainer/LevelLabel
+	level_label = $AspectRatioContainer2/MarginContainer/GridContainer/LevelLabel
 	button = $AspectRatioContainer2/MarginContainer/GridContainer/Button
 
 	button.disabled = true 
 
 func _process(_delta):
-	level_label.text = "Level: " + str(level)
+	level_label.text = "Level " + str(level)
 	
 	if health > 3:
 		actual_health = 3

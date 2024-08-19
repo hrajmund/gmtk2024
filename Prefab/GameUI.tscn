@@ -29,49 +29,49 @@ margin_right = 174.0
 margin_bottom = 46.0
 
 [node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
-margin_right = 174.0
-margin_bottom = 46.0
+margin_left = 64.0
+margin_right = 90.0
+margin_bottom = 26.0
 
 [node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/MarginContainer"]
-margin_right = 174.0
-margin_bottom = 46.0
-
-[node name="LevelLabel" type="Label" parent="AspectRatioContainer/MarginContainer/GridContainer"]
-margin_right = 174.0
-margin_bottom = 46.0
-theme = ExtResource( 3 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Health: 0"
+margin_right = 26.0
+margin_bottom = 26.0
 
 [node name="HealthSprite" type="Sprite" parent="AspectRatioContainer/MarginContainer/GridContainer"]
-position = Vector2( 90, 100 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 130, 100 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-
-[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer"]
-margin_left = 64.0
-margin_right = 110.0
-margin_bottom = 46.0
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 96.0
 
 [node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2"]
-margin_left = 892.5
-margin_right = 1027.5
-margin_bottom = 96.0
+margin_left = 862.5
+margin_right = 1057.5
+margin_bottom = 195.0
 custom_constants/margin_top = 50
 
 [node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/MarginContainer"]
 margin_top = 50.0
+margin_right = 195.0
+margin_bottom = 195.0
+
+[node name="LevelLabel" type="Label" parent="AspectRatioContainer2/MarginContainer/GridContainer"]
 margin_right = 135.0
-margin_bottom = 96.0
+margin_bottom = 95.0
+theme = ExtResource( 3 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Level 0"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="Button" type="Button" parent="AspectRatioContainer2/MarginContainer/GridContainer"]
+margin_top = 99.0
 margin_right = 135.0
-margin_bottom = 46.0
+margin_bottom = 145.0
 theme = ExtResource( 3 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
