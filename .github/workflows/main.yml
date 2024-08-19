@@ -12,24 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Export Templates
-        run: |
-          mkdir -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-
       - name: Create Export Folder
-        run: mkdir -p web_export
+        run: mkdir -p export
 
       - name: Web Build
         run: |
-          cd ${{ github.workspace }}
-          godot --headless --verbose --export-release "HTML5" web_export/index.html
+          godot --headless --verbose --export-release "HTML5" export/index.html
 
       - name: Zip Export Folder
-        run: zip -r web_export.zip web_export/
+        run: zip -r export.zip export/
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: web_export.zip
-          path: web_export.zip
+          name: export.zip
+          path: export.zip
