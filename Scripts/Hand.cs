@@ -77,7 +77,11 @@ public class Hand : Node2D
 		return yOn < Position.y - 300;
 	}
 
-
+	public bool HasMoreCards()
+	{
+		return _cards.Count > 0;
+	}
+	
 	public void ClearCards()
 	{
 		_cards.Clear();
