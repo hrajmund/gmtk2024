@@ -161,7 +161,7 @@ centered = false
 position = Vector2( 962, 537 )
 scale = Vector2( 0.705333, 0.705333 )
 frames = SubResource( 3 )
-frame = 3
+frame = 5
 playing = true
 offset = Vector2( 0, -35 )
 

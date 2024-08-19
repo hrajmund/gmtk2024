@@ -35,6 +35,7 @@ window/stretch/aspect="keep"
 editor=false
 plugin=false
 asset=false
+load=false
 
 [gui]
 
