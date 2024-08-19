@@ -217,7 +217,9 @@ public partial class GameController : Node
 	private void GameOver()
 	{
 		_animationPlayer.Play("GameEnd");
-		Music.stopMusic()
+		
+		var musicScript = GetNode("/root/Music");
+		musicScript.Call("stopMusic");
 	}
 
 	private void LoadMainScene()
