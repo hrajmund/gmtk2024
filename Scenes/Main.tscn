@@ -34,6 +34,7 @@
 [ext_resource path="res://Scripts/MessageBubbleLabel.cs" type="Script" id=32]
 [ext_resource path="res://PixelArts/textbubble/textbubble1.png" type="Texture" id=33]
 [ext_resource path="res://PixelArts/characters/goblin_head.png" type="Texture" id=34]
+[ext_resource path="res://Animations/ScenesGameBegin.tres" type="Animation" id=35]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LightPulse"
@@ -117,108 +118,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ "attack", "default" ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "GameBegin"
-length = 5.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Wizard:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1, 5.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -700, 680 ), Vector2( -561, 680 ), Vector2( 340, 680 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 5.6 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "BeginLevel"
-} ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Camera2D/Control:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 5.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("ColorRect:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("ColorRect:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.1, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Goblin/TutorialInformation:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 2.6, 5.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Goblin/TutorialInformation:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 2.6, 3, 3.1, 5, 5.1 ),
-"transitions": PoolRealArray( 1, 1, 35.5062, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 4.7, 4.7 ), Vector2( 4.5, 4.5 ), Vector2( 4.7, 4.7 ), Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Goblin/TutorialInformation:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 2.6, 3, 5.1 ),
-"transitions": PoolRealArray( 1, 50, 1 ),
-"update": 0,
-"values": [ Vector2( -550, -300 ), Vector2( -1216, -736 ), Vector2( -550, -300 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -314,6 +213,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Wizard:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "default" ]
+}
 
 [sub_resource type="DynamicFont" id=10]
 size = 73
@@ -347,7 +258,7 @@ _nuggetScene = ExtResource( 2 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="HandManager" parent="." instance=ExtResource( 1 )]
-position = Vector2( 490, 390 )
+position = Vector2( 490, 420 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1000
@@ -432,12 +343,13 @@ position = Vector2( 1640, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Goblin"]
+visible = false
 position = Vector2( -464, -540 )
-scale = Vector2( 1e-05, 1e-05 )
+scale = Vector2( 1.3, 1.3 )
 texture = ExtResource( 30 )
 
 [node name="Label" type="Label" parent="Goblin/Sprite"]
@@ -476,12 +388,12 @@ autowrap = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/CardPlayed = SubResource( 5 )
-anims/GameBegin = SubResource( 4 )
+anims/GameBegin = ExtResource( 35 )
 anims/GameEnd = SubResource( 9 )
 anims/GoblinSubmitGold = SubResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 0.285714 )
+modulate = Color( 0, 0, 0, 1 )
 anchor_bottom = 1.0
 margin_right = 1980.0
 margin_bottom = 2000.0
@@ -516,7 +428,7 @@ custom_fonts/font = SubResource( 12 )
 text = "Back To Menu"
 
 [node name="GameOverHead" type="Sprite" parent="Label"]
-position = Vector2( 1024, -139.67 )
+position = Vector2( 1024, -187.185 )
 texture = ExtResource( 34 )
 
 [connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
