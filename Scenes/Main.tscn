@@ -253,8 +253,6 @@ current = true
 
 [node name="Control" parent="Camera2D" instance=ExtResource( 3 )]
 visible = false
-health = 3
-level = 1
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 156, 345 )
@@ -366,4 +364,5 @@ margin_right = 1980.0
 margin_bottom = 2000.0
 
 [connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
+[connection signal="CardPlayed" from="HandManager" to="Camera2D/Control" method="_on_HandManager_CardPlayed"]
 [connection signal="submit_button_pressed" from="Camera2D/Control" to="." method="OnTurnFinnish"]

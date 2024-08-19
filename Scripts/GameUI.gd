@@ -10,6 +10,7 @@ var max_width
 
 var health_sprite
 var level_label
+var button
 
 var actual_health
 
@@ -26,9 +27,11 @@ func _ready():
 
 	health_sprite = $AspectRatioContainer/MarginContainer/GridContainer/HealthSprite
 	level_label = $AspectRatioContainer/MarginContainer/GridContainer/LevelLabel
+	button = $AspectRatioContainer2/MarginContainer/GridContainer/Button
 
+	button.disabled = true 
 
-func _process(delta):
+func _process(_delta):
 	level_label.text = "Level: " + str(level)
 	
 	if health > 3:
@@ -43,3 +46,8 @@ func _process(delta):
 
 func _on_Button_pressed():
 	emit_signal("submit_button_pressed");
+	button.disabled = true
+
+
+func _on_HandManager_CardPlayed():
+	button.disabled = false
