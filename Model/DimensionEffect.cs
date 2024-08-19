@@ -35,6 +35,8 @@ namespace Gmtk2024.Model
         public override string HumanReadable()
         {
             string suffix = Op == Operation.Rotation ? "°" : "x";
+            if (_operation == Operation.Rotation)
+                return $"Rotates the object by " + _value + suffix;
             return Op.ToString() + " to the " + Dimension.ToString() + " axis by " + _value.ToString() + suffix;
         }
 
