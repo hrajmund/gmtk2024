@@ -316,7 +316,7 @@ light_mask = 0
 position = Vector2( -561, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
