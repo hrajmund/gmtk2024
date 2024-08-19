@@ -118,12 +118,10 @@ font_data = ExtResource( 31 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
+_level = 4
 _nuggetScene = ExtResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="."]
-
-[node name="HandManager" parent="." instance=ExtResource( 1 )]
-position = Vector2( 490, 420 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1000
@@ -199,7 +197,7 @@ light_mask = 0
 position = Vector2( -682.065, 680 )
 scale = Vector2( 0.55, 0.55 )
 frames = SubResource( 2 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="Goblin" type="AnimatedSprite" parent="."]
@@ -208,7 +206,6 @@ position = Vector2( 1640, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
-frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Goblin"]
@@ -258,10 +255,13 @@ anims/GameEnd = ExtResource( 38 )
 anims/GoblinSubmitGold = ExtResource( 37 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 0.285714 )
+modulate = Color( 0, 0, 0, 1 )
 anchor_bottom = 1.0
 margin_right = 1980.0
 margin_bottom = 2000.0
+
+[node name="HandManager" parent="." instance=ExtResource( 1 )]
+position = Vector2( 490, 420 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -293,10 +293,10 @@ custom_fonts/font = SubResource( 12 )
 text = "Back To Menu"
 
 [node name="GameOverHead" type="Sprite" parent="Label"]
-position = Vector2( 1024, -229.96 )
+position = Vector2( 1024, -116 )
 texture = ExtResource( 34 )
 
+[connection signal="submit_button_pressed" from="Camera2D/Control" to="." method="OnTurnFinnish"]
 [connection signal="CardPlayed" from="HandManager" to="." method="OnCardPlayed"]
 [connection signal="CardPlayed" from="HandManager" to="Camera2D/Control" method="_on_HandManager_CardPlayed"]
-[connection signal="submit_button_pressed" from="Camera2D/Control" to="." method="OnTurnFinnish"]
 [connection signal="pressed" from="Label/Button" to="." method="LoadMainScene"]
