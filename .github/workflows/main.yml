@@ -17,7 +17,7 @@ jobs:
 
       - name: Web Build
         run: |
-          godot --headless --verbose --editor --quit-after 20
+          godot --headless --verbose --import --editor --quit-after 20
           godot --headless --verbose --import --export-release "HTML5" export/index.html
 
       - name: Zip Export Folder
