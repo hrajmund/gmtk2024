@@ -10,11 +10,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Pull Docker image
+        run: docker pull robpc/godot-headless:3.5.3-html
+
       - name: Export Web PCK
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/project \
-            godot-headless:3.5.3-html \
+            robpc/godot-headless:3.5.3-html \
             --path /project --export Web demo-web.pck
 
       - name: Upload Artifact
