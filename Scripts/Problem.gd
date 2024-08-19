@@ -68,7 +68,7 @@ func generate_problem_value(operation, level: int) -> float:
 		sub_op:
 			var op_number = rand_range(0.2, 1.1)
 			if op_number >= 1:
-				op_number -= 0.2
+				op_number = 0.8
 			elif op_number <= 0:
 				op_number = 0.2
 			return _round_to_one_decimal(op_number)
