@@ -36,6 +36,9 @@ public partial class GameController : Node
 
 	private Hand _handManager;
 
+	[Export]
+	private PackedScene _nuggetScene;
+
 	private GoldenNugget _targetNugget;
 	private GoldenNugget _transformNugget;
 
@@ -47,16 +50,34 @@ public partial class GameController : Node
 	{
 		GD.Randomize();
 		_handManager = GetNode<Hand>("HandManager");
-		_targetNugget = GetNode<GoldenNugget>("TargetNugget");
-		_transformNugget = GetNode<GoldenNugget>("TransformNugget");
 		_uiScript = GetNode<Control>("Camera2D/Control");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_wizard = GetNode<AnimatedSprite>("Wizard");	
+		_wizard = GetNode<AnimatedSprite>("Wizard");
 		
 		Level = 1;
 		Lives = 3;
 		
 		_animationPlayer.Play("GameBegin");
+	}
+
+	private void ClearNuggets() {
+		Node2D node = GetNode<Node2D>("Node2D");
+
+		if (_targetNugget != null) {
+			GD.Print("_targetNugget cleaned");
+			_targetNugget.QueueFree();
+		}
+		_targetNugget = _nuggetScene.Instance() as GoldenNugget;
+		_targetNugget.Position = new Vector2(1282, 330);
+		node.AddChild(_targetNugget);
+
+		if (_transformNugget != null) {
+			GD.Print("_transformNugget cleaned");
+			_transformNugget.QueueFree();
+		}
+		_transformNugget = _nuggetScene.Instance() as GoldenNugget;
+		_transformNugget.Position = new Vector2(625, 330);
+		node.AddChild(_transformNugget);
 	}
 
 	private void BeginLevel()
@@ -81,6 +102,8 @@ public partial class GameController : Node
 		}
 
 		Vector2 dimensions = new Vector2(GD.Randi() % 200 + 100, GD.Randi() % 200 + 100);
+
+		ClearNuggets();
 		
 		_targetNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
 		_transformNugget.setPolygonType(polygonType, (int)rotateType, (int)dimensions.x, (int)dimensions.y);
