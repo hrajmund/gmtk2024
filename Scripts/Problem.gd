@@ -15,8 +15,8 @@ func generate_problem(level: int) -> Array:
 	var possibilities = [
 		operation_helper.GetAddition(),
 		operation_helper.GetSubtraction(),
-		#operation_helper.GetMultiplication(),
-		#operation_helper.GetDivision(),
+		operation_helper.GetMultiplication(),
+		operation_helper.GetDivision(),
 		operation_helper.GetRotation(),
 		# operation_helper.GetPower(),
 		# operation_helper.GetRoot()
@@ -66,18 +66,18 @@ func generate_problem_value(operation, level: int) -> float:
 				add_number = 0.2
 			return add_number
 		sub_op:
-			var op_number = rand_range(0, 1)+0.2
+			var op_number = rand_range(0.2, 1.1)
 			if op_number >= 1:
 				op_number -= 0.2
 			elif op_number <= 0:
 				op_number = 0.2
 			return _round_to_one_decimal(op_number)
 		mul_op:
-			var mul_numbers = [0.2, 0.2, 0.25, 0.5, 0.75]
+			var mul_numbers = [1.2, 1.25, 1.5, 1.75]
 			var selected = mul_numbers[randi() % mul_numbers.size()]
-			return (selected + round(rand_range(0,5)))*10
+			return selected
 		div_op:
-			return _round_to_one_decimal(rand_range(1, max_val) + randf()/5)
+			return _round_to_one_decimal(rand_range(1.1, 2) + randf()/5)
 		div_pow, div_root:
 			var r_numbers = [1.1, 1.2, 1.3, 1.4, 1.5]
 			return (r_numbers[randi() % r_numbers.size()])/5
