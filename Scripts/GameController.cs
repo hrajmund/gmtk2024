@@ -211,14 +211,14 @@ public partial class GameController : Node
 		}
 	}
 
-	private void OnCardPlayed()
+	private void OnCardPlayed(bool hasMoreCards)
 	{
 		ApplyEffectTo(_transformNugget, _handManager.CurrentPlayed);      
 		
 		GD.Print("Are equal: ", _transformNugget.Compare(_targetNugget, Level));
 		
 		
-		if (!_handManager.HasMoreCards())
+		if (!hasMoreCards)
 		{
 			OnTurnFinnish();
 		}

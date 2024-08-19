@@ -13,7 +13,7 @@ public class Hand : Node2D
 	public List<Effect> CurrentPlayed { get; private set; }
 
 	[Signal]
-	public delegate void CardPlayed();
+	public delegate void CardPlayed(bool hasMoreCards);
 
 	public override void _Process(float delta)
 	{
@@ -69,7 +69,7 @@ public class Hand : Node2D
 		// handle application here
 
 		CurrentPlayed = effects;
-		EmitSignal("CardPlayed");
+		EmitSignal("CardPlayed", HasMoreCards());
 	}
 
 	private bool IsPlayableCard(int xOn, int yOn)

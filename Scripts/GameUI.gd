@@ -49,5 +49,5 @@ func _on_Button_pressed():
 	button.disabled = true
 
 
-func _on_HandManager_CardPlayed():
-	button.disabled = false
+func _on_HandManager_CardPlayed(hasMoreCards):
+	button.disabled = !hasMoreCards
