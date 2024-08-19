@@ -18,7 +18,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/project \
             robpc/godot-headless:3.5.3-html \
-            --path /project --export Web demo-web.pck
+            --path /project --export HTML5 demo-web.pck
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
