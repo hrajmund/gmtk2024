@@ -40,6 +40,8 @@ margin_bottom = 46.0
 margin_right = 174.0
 margin_bottom = 46.0
 theme = ExtResource( 3 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Health: 0"
 
 [node name="HealthSprite" type="Sprite" parent="AspectRatioContainer/MarginContainer/GridContainer"]
