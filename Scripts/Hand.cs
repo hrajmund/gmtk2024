@@ -9,11 +9,17 @@ public class Hand : Node2D
 	[Export]
 	public PackedScene CardScene;
 	private List<Card> _cards = new();
+	private AudioStreamPlayer _audioPlayer;
 
 	public List<Effect> CurrentPlayed { get; private set; }
 
 	[Signal]
 	public delegate void CardPlayed(bool hasMoreCards);
+
+	public override void _Ready()
+	{
+		_audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+	}
 
 	public override void _Process(float delta)
 	{
@@ -70,6 +76,7 @@ public class Hand : Node2D
 
 		CurrentPlayed = effects;
 		EmitSignal("CardPlayed", HasMoreCards());
+		_audioPlayer.Play(.1f);
 	}
 
 	private bool IsPlayableCard(int xOn, int yOn)
@@ -87,9 +94,4 @@ public class Hand : Node2D
 		_cards.Clear();
 		GetTree().CallGroup(Reference.CardGroup, "TriggerRemove");
 	}
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-	//  public override void _Process(float delta)
-	//  {
-	//      
-	//  }
 }
