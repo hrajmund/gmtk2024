@@ -71,7 +71,7 @@ func generate_problem_value(operation, level: int) -> float:
 				op_number = 0.8
 			elif op_number <= 0:
 				op_number = 0.2
-			return _round_to_one_decimal(op_number)
+			return _round_to_one_decimal(op_number)-0.1
 		mul_op:
 			var mul_numbers = [1.2, 1.25, 1.5, 1.75]
 			var selected = mul_numbers[randi() % mul_numbers.size()]
