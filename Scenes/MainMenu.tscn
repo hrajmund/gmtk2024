@@ -1,10 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Theme/Default_Theme.tres" type="Theme" id=2]
 [ext_resource path="res://Theme/mainTitle.tres" type="DynamicFont" id=3]
 [ext_resource path="res://PixelArts/BG_MENU.png" type="Texture" id=4]
 [ext_resource path="res://PixelArts/light.png" type="Texture" id=5]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-0.png" type="Texture" id=6]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-1.png" type="Texture" id=7]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-2.png" type="Texture" id=8]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-3.png" type="Texture" id=9]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-4.png" type="Texture" id=10]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-5.png" type="Texture" id=11]
+[ext_resource path="res://PixelArts/Title_animation/pixil-frame-6.png" type="Texture" id=12]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=2]
 resource_name = "FadeOutBeginGame"
@@ -93,6 +108,7 @@ margin_right = 380.5
 margin_bottom = 129.5
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
+visible = false
 margin_right = 761.0
 margin_bottom = 91.0
 theme = ExtResource( 2 )
@@ -100,23 +116,22 @@ custom_fonts/font = ExtResource( 3 )
 text = "Generic game #135"
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_top = 95.0
 margin_right = 761.0
-margin_bottom = 147.0
+margin_bottom = 52.0
 theme = ExtResource( 2 )
 text = "Start"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
-margin_top = 151.0
+margin_top = 56.0
 margin_right = 761.0
-margin_bottom = 203.0
+margin_bottom = 108.0
 theme = ExtResource( 2 )
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 207.0
+margin_top = 112.0
 margin_right = 761.0
-margin_bottom = 259.0
+margin_bottom = 164.0
 theme = ExtResource( 2 )
 text = "Quit"
 
@@ -124,6 +139,13 @@ text = "Quit"
 z_index = -10
 texture = ExtResource( 4 )
 centered = false
+
+[node name="TitleAnimatedSprite" type="AnimatedSprite" parent="BackgroundSprite"]
+position = Vector2( 950, 400 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 3 )
+frame = 2
+playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 156, 345 )
