@@ -19,7 +19,7 @@ public partial class GameController : Node
 		set
 		{
 			_lives = value;
-			_uiScript.Set("health", value);
+			_uiScript.Call("_set_health", value);
 			UpdateGoblinState();
 		}
 	}
@@ -30,7 +30,7 @@ public partial class GameController : Node
 		set
 		{
 			_level = value;
-			_uiScript.Set("level", value);
+			_uiScript.Call("_set_level", value);
 		}
 	}
 
