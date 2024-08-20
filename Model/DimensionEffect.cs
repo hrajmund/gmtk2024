@@ -82,7 +82,7 @@ namespace Gmtk2024.Model
             return true;
         }
 
-        public override DimensionEffect Clone()
+        public override object Clone()
         {
             return new DimensionEffect(Op, Dimension, _value);
         }
