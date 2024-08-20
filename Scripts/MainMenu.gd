@@ -1,6 +1,7 @@
 extends Control
 
 var animation_player
+var master_bus = AudioServer.get_bus_index("Master")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,3 +28,12 @@ func _on_CreditsButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+
+func _on_HSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(master_bus, value)
+	if(value == -30):
+		AudioServer.set_bus_mute(master_bus, true)
+	else:
+		AudioServer.set_bus_mute(master_bus, false)
+	pass # Replace with function body.

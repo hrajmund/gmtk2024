@@ -204,6 +204,7 @@ position = Vector2( 1640, 680 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 animation = "ThirdPhase"
+frame = 3
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Goblin"]

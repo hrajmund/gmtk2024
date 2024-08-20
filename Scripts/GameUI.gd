@@ -7,7 +7,7 @@ export(int) var level = 1
 
 
 var max_width
-
+var master_bus = AudioServer.get_bus_index("Master")
 var health_sprite
 var level_label
 var button
@@ -24,7 +24,6 @@ var hp_textures = [
 
 func _ready():
 	var panel_container = $AspectRatioContainer/MarginContainer
-
 	health_sprite = $AspectRatioContainer/MarginContainer/GridContainer/HealthSprite
 	level_label = $AspectRatioContainer2/MarginContainer/GridContainer/LevelLabel
 	button = $AspectRatioContainer2/MarginContainer/GridContainer/Button
@@ -51,3 +50,12 @@ func _on_Button_pressed():
 
 func _on_HandManager_CardPlayed(hasMoreCards):
 	button.disabled = !hasMoreCards
+
+
+func _on_HSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(master_bus, value)
+	if(value == -30):
+		AudioServer.set_bus_mute(master_bus, true)
+	else:
+		AudioServer.set_bus_mute(master_bus, false)
+	pass # Replace with function body.
