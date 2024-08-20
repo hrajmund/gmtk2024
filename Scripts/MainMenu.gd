@@ -8,6 +8,8 @@ func _ready():
 	$VBoxContainer/StartButton.grab_focus()
 	animation_player = $AnimationPlayer
 	Music.playMusic()
+	var slider_ui = $HSlider
+	slider_ui.value = AudioServer.get_bus_volume_db(master_bus)
 	preload("res://Scenes/Main.tscn")
 
 

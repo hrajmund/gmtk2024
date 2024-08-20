@@ -27,7 +27,8 @@ func _ready():
 	health_sprite = $AspectRatioContainer/MarginContainer/GridContainer/HealthSprite
 	level_label = $AspectRatioContainer2/MarginContainer/GridContainer/LevelLabel
 	button = $AspectRatioContainer2/MarginContainer/GridContainer/Button
-
+	var slider_menu = $HSlider
+	slider_menu.value = AudioServer.get_bus_volume_db(master_bus)
 	button.disabled = true 
 
 func _process(_delta):

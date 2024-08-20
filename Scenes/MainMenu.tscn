@@ -188,6 +188,15 @@ scale = Vector2( 1.33325, 1.31046 )
 texture = ExtResource( 5 )
 color = Color( 0.909804, 0.662745, 0, 1 )
 
+[node name="HSlider" type="HSlider" parent="."]
+margin_left = 1456.0
+margin_top = -227.0
+margin_right = 1679.0
+margin_bottom = 36.0
+rect_scale = Vector2( 2, 2 )
+min_value = -30.0
+max_value = 5.0
+
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 modulate = Color( 0, 0, 0, 0 )
@@ -199,15 +208,6 @@ root_node = NodePath("../Light2D2")
 autoplay = "LightPulse"
 anims/FadeOutBeginGame = SubResource( 2 )
 anims/LightPulse = SubResource( 1 )
-
-[node name="HSlider" type="HSlider" parent="."]
-margin_left = 1456.0
-margin_top = -227.0
-margin_right = 1679.0
-margin_bottom = 36.0
-rect_scale = Vector2( 2, 2 )
-min_value = -30.0
-max_value = 5.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
