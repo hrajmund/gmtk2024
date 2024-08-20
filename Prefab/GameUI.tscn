@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/GameUI.gd" type="Script" id=1]
 [ext_resource path="res://PixelArts/hearts/3hearts.png" type="Texture" id=2]
 [ext_resource path="res://Theme/Default_Theme.tres" type="Theme" id=3]
 [ext_resource path="res://PixelArts/submit_button.png" type="Texture" id=4]
+[ext_resource path="res://Animations/LevelChangeAnimation.tres" type="Animation" id=5]
+[ext_resource path="res://Animations/HealthChangeAnimation.tres" type="Animation" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 4 )
@@ -38,9 +40,10 @@ margin_right = 26.0
 margin_bottom = 26.0
 
 [node name="HealthSprite" type="Sprite" parent="AspectRatioContainer/MarginContainer/GridContainer"]
-position = Vector2( 130, 100 )
+position = Vector2( 89, 44 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
+offset = Vector2( 82, 112 )
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
 margin_right = 1920.0
@@ -60,8 +63,10 @@ margin_bottom = 195.0
 [node name="LevelLabel" type="Label" parent="AspectRatioContainer2/MarginContainer/GridContainer"]
 margin_right = 135.0
 margin_bottom = 95.0
+rect_pivot_offset = Vector2( 68.5, 42 )
 theme = ExtResource( 3 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.0235294, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Level 0"
 align = 1
@@ -80,4 +85,18 @@ custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 text = "Submit"
 
+[node name="HSlider" type="HSlider" parent="."]
+margin_left = 1456.0
+margin_top = -227.0
+margin_right = 1679.0
+margin_bottom = 36.0
+rect_scale = Vector2( 2, 2 )
+min_value = -30.0
+max_value = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/HealthChange = ExtResource( 6 )
+anims/LevelChange = ExtResource( 5 )
+
 [connection signal="pressed" from="AspectRatioContainer2/MarginContainer/GridContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]

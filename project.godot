@@ -30,12 +30,18 @@ window/size/height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[editor]
+
+convert_text_resources_to_binary_on_export=true
+
 [global]
 
 editor=false
 plugin=false
 asset=false
 load=false
+export=true
+cli=false
 
 [gui]
 
@@ -44,6 +50,9 @@ common/drop_mouse_on_gui_input_disabled=true
 [mono]
 
 project/assembly_name="Gmtk_2024"
+project/solution_directory="Gmtk_2024.sln"
+export/include_scripts_content=true
+export/aot/use_interpreter=false
 
 [physics]
 

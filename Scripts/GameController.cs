@@ -19,7 +19,7 @@ public partial class GameController : Node
 		set
 		{
 			_lives = value;
-			_uiScript.Set("health", value);
+			_uiScript.Call("_set_health", value);
 			UpdateGoblinState();
 		}
 	}
@@ -30,7 +30,7 @@ public partial class GameController : Node
 		set
 		{
 			_level = value;
-			_uiScript.Set("level", value);
+			_uiScript.Call("_set_level", value);
 		}
 	}
 
@@ -147,11 +147,23 @@ public partial class GameController : Node
 				}
 				int oneCard = (int)(GD.Randi() % result.Count);
 
+				if (result[oneCard].Count >= 3)
+				{
+					mergeCards--;
+					continue;
+				}
+
 				int secondCard = (int)(GD.Randi() % result.Count);
 
 				while (secondCard == oneCard)
 				{
 					secondCard = (int)(GD.Randi() % result.Count);
+				}
+				
+				if (result[secondCard].Count >= 3)
+				{
+					mergeCards--;
+					continue;
 				}
 
 				List<Effect> oneList = result[oneCard];
