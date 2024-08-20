@@ -147,11 +147,23 @@ public partial class GameController : Node
 				}
 				int oneCard = (int)(GD.Randi() % result.Count);
 
+				if (result[oneCard].Count >= 3)
+				{
+					mergeCards--;
+					continue;
+				}
+
 				int secondCard = (int)(GD.Randi() % result.Count);
 
 				while (secondCard == oneCard)
 				{
 					secondCard = (int)(GD.Randi() % result.Count);
+				}
+				
+				if (result[secondCard].Count >= 3)
+				{
+					mergeCards--;
+					continue;
 				}
 
 				List<Effect> oneList = result[oneCard];
