@@ -56,6 +56,8 @@ func _on_HSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(master_bus, value)
 	if(value == -30):
 		AudioServer.set_bus_mute(master_bus, true)
+	elif (value >= 5):
+		AudioServer.set_bus_volume_db(master_bus, 5);
 	else:
 		AudioServer.set_bus_mute(master_bus, false)
 	pass # Replace with function body.

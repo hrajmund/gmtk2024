@@ -161,7 +161,7 @@ centered = false
 position = Vector2( 962, 537 )
 scale = Vector2( 0.705333, 0.705333 )
 frames = SubResource( 3 )
-frame = 2
+frame = 6
 playing = true
 offset = Vector2( 0, -35 )
 
@@ -207,7 +207,7 @@ margin_right = 1679.0
 margin_bottom = 36.0
 rect_scale = Vector2( 2, 2 )
 min_value = -30.0
-max_value = 20.0
+max_value = 5.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
