@@ -146,6 +146,7 @@ theme = ExtResource( 2 )
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
+visible = false
 margin_top = 112.0
 margin_right = 761.0
 margin_bottom = 164.0
@@ -161,7 +162,6 @@ centered = false
 position = Vector2( 962, 537 )
 scale = Vector2( 0.705333, 0.705333 )
 frames = SubResource( 3 )
-frame = 6
 playing = true
 offset = Vector2( 0, -35 )
 
