@@ -4,24 +4,26 @@ on: [push, pull_request]
 
 jobs:
   export-web-pck:
+    name: Web Export
     runs-on: ubuntu-latest
-
+    container:
+      image: barichello/godot-ci:mono-3.5.2
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Pull Docker image
-        run: docker pull robpc/godot-headless:3.5.3-html
+      - name: Create Export Folder
+        run: mkdir -p export
 
-      - name: Export Web PCK
+      - name: Web Build
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/project \
-            robpc/godot-headless:3.5.3-html \
-            --path /project --export Web demo-web.pck
+          godot --headless --verbose --import --quit-after 42 --export-release "HTML5" export/index.html
 
-      - name: Upload Artifact
+      - name: Zip Export Folder
+        run: zip -r export.zip export/
+
+      - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: demo-web.pck
-          path: demo-web.pck
+          name: export.zip
+          path: export.zip
